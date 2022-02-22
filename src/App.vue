@@ -1,16 +1,16 @@
 <template>
   <section>
-    <nav-bar></nav-bar>
+    <main-desktop></main-desktop>
   </section>
 </template>
 
 <script>
-import NavBar from './components/NavBar.vue'
+import MainDesktop from './components/desktop/MainDesktop.vue'
 
 export default {
   name: "App",
   components: {
-    NavBar
+    MainDesktop
   }
 };
 </script>
@@ -24,6 +24,10 @@ export default {
   box-sizing: border-box;
 }
 body {
-  background: black;
+  background: #222222;
+}
+
+:root {
+  --standard-orange: #f09001;
 }
 </style>
