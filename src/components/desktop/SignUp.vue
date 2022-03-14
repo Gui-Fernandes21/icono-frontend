@@ -34,29 +34,35 @@ export default {
   },
   methods: {
     async signup() {
-      // const variables = {
-      //   name: this.name,
-      //   email: this.email,
-      //   secret: this.secret,
-      // };
-      const req = `
-      mutation {
-        createUser(data: {name: "gasd", email: "test@asd.com", secret: "123"}) {
+      const variables = {
+        name: this.name,
+        email: this.email,
+        secret: this.secret,
+      };
+
+      
+      const query = `
+        mutation($input: UserCreationInput!) {
+        createUser(data: $input) {
           clearance
           email
         }
       }
-      `;
+      `
 
-      console.log(req);
+      const payload = {
+        query: query,
+        variables: {input: variables}
+      }
 
-      const result = await fetch("http://localhost:4001/graphql", {
+      console.log(payload);
+
+      const result = await fetch("http://localhost:4001/", {
         headers: {
           "Content-Type": "application/json",
-          'Accept': 'application/json',
         },
         method: "POST",
-        body: req,
+        body: JSON.stringify(payload),
       });
       console.log(result);
     },
