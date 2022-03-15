@@ -2,19 +2,17 @@
   <section>
     <nav-bar></nav-bar>
     <main>
-      <sign-up></sign-up>
+      <router-view></router-view>
     </main>
   </section>
 </template>
 
 <script>
 import NavBar from "./layout/NavBar.vue";
-import SignUp from "./SignUp.vue";
 
 export default {
   components: {
     NavBar,
-    SignUp,
   },
 };
 </script>

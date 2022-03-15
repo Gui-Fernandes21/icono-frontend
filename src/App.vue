@@ -11,6 +11,11 @@ export default {
   name: "App",
   components: {
     MainDesktop
+  },
+  computed: {
+    isMobile() {
+      return this.$store.getters.getMobile;
+    }
   }
 };
 </script>

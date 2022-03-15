@@ -1,10 +1,14 @@
 <template>
   <nav>
-    <a href="#" class="logo">icono</a>
+    <a href="/home" class="logo">icono</a>
     <ul>
-      <li><a href="#">Home</a></li>
+      <li>
+        <router-link :to="'/home'" active-class="active">Home</router-link>
+      </li>
       <li><a href="#">Login</a></li>
-      <li><a href="#">Sign up</a></li>
+      <li>
+        <router-link :to="'/signup'" active-class="active">Sign up</router-link>
+      </li>
     </ul>
   </nav>
 </template>
@@ -40,9 +44,10 @@ ul li {
 ul li a {
   font-weight: 200;
   font-size: 13px;
-  font-family: 'Russo One', sans-serif;
+  font-family: "Russo One", sans-serif;
 }
-ul li a:hover {
+ul li a:hover,
+ul li a.active {
   border-bottom: 1px solid var(--standard-orange);
 }
 </style>
