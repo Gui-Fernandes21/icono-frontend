@@ -23,11 +23,37 @@
 export default {
   data() {
     return {
-      name: "",
       email: "",
       secret: "",
     };
   },
+  methods: {
+    async login() {
+      
+      const variables = {
+        email: this.email,
+        password: this.password
+      }
+
+      const query = ``;
+
+      const payload = {
+        query,
+        variables: {input: variables}
+      }
+
+      const result = await fetch('http://localhost:4001/graphql', {
+        headers: {
+          "Content-Type": "application/json",
+        },
+        method: "POST",
+        body: JSON.stringify(payload),
+      });
+
+      console.log(result);
+
+    }
+  }
 };
 </script>
 
@@ -35,7 +61,7 @@ export default {
 .card {
   height: 50vh;
   width: 50vw;
-  background: rgb(56, 56, 56);
+  background: #383838;
   border-radius: 20px;
 }
 header {

@@ -21,6 +21,7 @@
   font-size: 2rem;
   font-weight: bold;
   letter-spacing: 4px;
+  user-select: none;
 }
 nav {
   width: 100%;
@@ -47,6 +48,7 @@ ul li a {
   font-weight: 200;
   font-size: 13px;
   font-family: "Russo One", sans-serif;
+  user-select: none;
 }
 ul li a:hover,
 ul li a.active {

@@ -33,38 +33,14 @@ export default {
     };
   },
   methods: {
-    async signup() {
+    signup() {
       const variables = {
-        name: this.name,
-        email: this.email,
-        secret: this.secret,
-      };
+      name: this.name,
+      email: this.email,
+      secret: this.secret,
+    };
 
-      
-      const query = `
-        mutation($input: UserCreationInput!) {
-        createUser(data: $input) {
-          clearance
-          email
-        }
-      }
-      `
-
-      const payload = {
-        query: query,
-        variables: {input: variables}
-      }
-
-      console.log(payload);
-
-      const result = await fetch("http://localhost:4001/graphql", {
-        headers: {
-          "Content-Type": "application/json",
-        },
-        method: "POST",
-        body: JSON.stringify(payload),
-      });
-      console.log(result);
+    this.$store.dispatch('signup', variables);
     },
   },
 };
