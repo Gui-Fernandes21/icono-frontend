@@ -5,7 +5,9 @@
       <li>
         <router-link :to="'/home'" active-class="active">Home</router-link>
       </li>
-      <li><a href="#">Login</a></li>
+      <li>
+        <router-link :to="'/login'" active-class="active">Login</router-link>
+      </li>
       <li>
         <router-link :to="'/signup'" active-class="active">Sign up</router-link>
       </li>
