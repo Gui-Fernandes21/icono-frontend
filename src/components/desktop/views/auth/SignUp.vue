@@ -35,12 +35,12 @@ export default {
   methods: {
     signup() {
       const variables = {
-      name: this.name,
-      email: this.email,
-      secret: this.secret,
-    };
+        name: this.name,
+        email: this.email,
+        secret: this.secret,
+      };
 
-    this.$store.dispatch('signup', variables);
+      this.$store.dispatch("signup", variables);
     },
   },
 };

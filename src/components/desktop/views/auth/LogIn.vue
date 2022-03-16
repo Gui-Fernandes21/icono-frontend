@@ -13,7 +13,7 @@
           <label>Password</label>
           <input type="password" v-model="secret" />
         </div>
-        <button>Login</button>
+        <button @click="login">Login</button>
       </div>
     </div>
   </section>
@@ -29,31 +29,14 @@ export default {
   },
   methods: {
     async login() {
-      
       const variables = {
         email: this.email,
-        password: this.password
-      }
+        secret: this.secret,
+      };
 
-      const query = ``;
-
-      const payload = {
-        query,
-        variables: {input: variables}
-      }
-
-      const result = await fetch('http://localhost:4001/graphql', {
-        headers: {
-          "Content-Type": "application/json",
-        },
-        method: "POST",
-        body: JSON.stringify(payload),
-      });
-
-      console.log(result);
-
-    }
-  }
+      this.$store.dispatch("login", variables);
+    },
+  },
 };
 </script>
 
