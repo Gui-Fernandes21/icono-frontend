@@ -6,16 +6,19 @@
       </header>
       <div class="main-section">
         <div class="input-control">
-          <label>Name</label>
-          <input type="text" v-model="name" />
+          <input type="text" v-model="firstName" placeholder="First Name"/>
         </div>
         <div class="input-control">
-          <label>Email</label>
-          <input type="email" v-model="email" />
+          <input type="text" v-model="lastName" placeholder="Last Name"/>
         </div>
         <div class="input-control">
-          <label>Password</label>
-          <input type="password" v-model="secret" />
+          <input type="email" v-model="email" placeholder="Email" />
+        </div>
+        <div class="input-control">
+          <input type="password" v-model="secret" placeholder="Password"/>
+        </div>
+        <div class="input-control">
+          <input type="password" v-model="confirmSecret" placeholder="Confirm Password"/>
         </div>
         <button @click="signup">Sign up</button>
       </div>
@@ -27,9 +30,11 @@
 export default {
   data() {
     return {
-      name: "",
+      firstName: "",
+      lastName: "",
       email: "",
       secret: "",
+      confirmSecret: ""
     };
   },
   methods: {
@@ -48,13 +53,13 @@ export default {
 
 <style scoped>
 .card {
-  height: 50vh;
+  min-height: 60vh;
   width: 50vw;
   background: rgb(56, 56, 56);
   border-radius: 20px;
 }
 header {
-  height: 4rem;
+  height: 6vh;
   width: 100%;
   background: var(--standard-orange);
   display: flex;
@@ -71,11 +76,18 @@ header h1 {
   letter-spacing: 2px;
 }
 .main-section {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  margin: 1rem 0;
+  height: 54vh;
+  padding: 2vw 4vw;
+  display: grid;
+  grid-template-columns: repeat(2, auto);
+  grid-template-rows: repeat(4, 12vh);
+  grid-template-areas: 
+    "first last"
+    "email email"
+    "password confirm"
+    "action action";
+  justify-content: stretch;
+  align-content: center;
 }
 .input-control {
   margin: 0.5rem;
@@ -85,8 +97,20 @@ header h1 {
   font-family: "Poppins", sans-serif;
   outline: none;
 }
-.input-control label {
-  color: #fff;
+.input-control:nth-child(1) {
+  grid-area: first;
+}
+.input-control:nth-child(2) {
+  grid-area: last;
+}
+.input-control:nth-child(3) {
+  grid-area: email;
+}
+.input-control:nth-child(4) {
+  grid-area: password;
+}
+.input-control:nth-child(5) {
+  grid-area: confirm;
 }
 .input-control input {
   background: transparent;
@@ -105,6 +129,8 @@ button {
   background: var(--standard-orange);
   border-radius: 10px;
   border: none;
+  grid-area: action;
+  place-self: center stretch;
 }
 button:hover {
   background: #ff9900;

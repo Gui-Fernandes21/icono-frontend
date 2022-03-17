@@ -18,17 +18,18 @@
 <style scoped>
 .logo {
   text-transform: uppercase;
-  font-size: 2rem;
+  font-size: 3vh;
   font-weight: bold;
   letter-spacing: 4px;
   user-select: none;
+  font-family: 'Russo One', sans-serif;
 }
 nav {
   width: 100%;
   display: flex;
   justify-content: space-around;
   align-items: center;
-  height: 5vh;
+  height: 6vh;
   background: #000;
 }
 a {
@@ -49,6 +50,7 @@ ul li a {
   font-size: 13px;
   font-family: "Russo One", sans-serif;
   user-select: none;
+    font-size: 1.4vh;
 }
 ul li a:hover,
 ul li a.active {
