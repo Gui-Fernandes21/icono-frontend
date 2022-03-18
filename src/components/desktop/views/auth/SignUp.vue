@@ -6,19 +6,23 @@
       </header>
       <div class="main-section">
         <div class="input-control">
-          <input type="text" v-model="firstName" placeholder="First Name"/>
+          <input type="text" v-model="firstName" placeholder="First Name" />
         </div>
         <div class="input-control">
-          <input type="text" v-model="lastName" placeholder="Last Name"/>
+          <input type="text" v-model="lastName" placeholder="Last Name" />
         </div>
         <div class="input-control">
           <input type="email" v-model="email" placeholder="Email" />
         </div>
         <div class="input-control">
-          <input type="password" v-model="secret" placeholder="Password"/>
+          <input type="password" v-model="secret" placeholder="Password" />
         </div>
         <div class="input-control">
-          <input type="password" v-model="confirmSecret" placeholder="Confirm Password"/>
+          <input
+            type="password"
+            v-model="confirmSecret"
+            placeholder="Confirm Password"
+          />
         </div>
         <button @click="signup">Sign up</button>
       </div>
@@ -34,14 +38,16 @@ export default {
       lastName: "",
       email: "",
       secret: "",
-      confirmSecret: ""
+      confirmSecret: "",
     };
   },
   methods: {
     async signup() {
-      const name = this.firstName + ' ' + this.lastName;
+      const name = this.firstName + " " + this.lastName;
 
-      if (this.secret !== this.confirmSecret) return console.log('Passwords do not match!');
+      if (this.secret !== this.confirmSecret) {
+        return console.log("Passwords do not match!");
+      }
 
       const variables = {
         name,
@@ -51,12 +57,12 @@ export default {
 
       const answer = await this.$store.dispatch("signup", variables);
 
-      if (answer.msg === 'ok') {
-        this.firstName = ''
-        this.lastName = ''
-        this.email = ''
-        this.secret = ''
-        this.confirmSecret = ''
+      if (answer.msg === "ok") {
+        this.firstName = "";
+        this.lastName = "";
+        this.email = "";
+        this.secret = "";
+        this.confirmSecret = "";
       }
     },
   },
@@ -91,14 +97,14 @@ header h1 {
   height: 54vh;
   padding: 2vw 5vw;
   display: grid;
-  grid-template-columns: repeat(2, auto);
+  grid-template-columns: repeat(2, calc(50% - 2vw));
   grid-template-rows: repeat(4, 12vh);
-  grid-template-areas: 
+  grid-template-areas:
     "first last"
     "email email"
     "password confirm"
     "action action";
-  justify-content: stretch;
+  justify-content: center;
   align-content: center;
 }
 .input-control {
@@ -132,11 +138,11 @@ header h1 {
   color: #fff;
   background: #222;
   outline: none;
-  font-family: 'Poppins', sans-serif;
+  font-family: "Poppins", sans-serif;
   font-size: 13px;
 }
 .input-control input::placeholder {
-  font-family: 'Poppins', sans-serif;
+  font-family: "Poppins", sans-serif;
 }
 button {
   margin: 1rem 0;
