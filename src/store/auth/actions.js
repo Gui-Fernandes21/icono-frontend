@@ -29,6 +29,8 @@ export default {
     const { data } = await result.json();
 
     await commit("authenticate", data.signup);
+
+    return { msg: "ok", status: 200 };
   },
   async login({ commit }, variables) {
     const query = `
@@ -60,10 +62,10 @@ export default {
     // data is returned deeply nested
     const { data } = await result.json();
 
-    console.log(data)
+    console.log(data);
 
     await commit("authenticate", data.login);
 
-
+    return { msg: "ok", status: 200 };
   },
 };

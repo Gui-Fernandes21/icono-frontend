@@ -38,14 +38,26 @@ export default {
     };
   },
   methods: {
-    signup() {
+    async signup() {
+      const name = this.firstName + ' ' + this.lastName;
+
+      if (this.secret !== this.confirmSecret) return console.log('Passwords do not match!');
+
       const variables = {
-        name: this.name,
+        name,
         email: this.email,
         secret: this.secret,
       };
 
-      this.$store.dispatch("signup", variables);
+      const answer = await this.$store.dispatch("signup", variables);
+
+      if (answer.msg === 'ok') {
+        this.firstName = ''
+        this.lastName = ''
+        this.email = ''
+        this.secret = ''
+        this.confirmSecret = ''
+      }
     },
   },
 };
@@ -77,7 +89,7 @@ header h1 {
 }
 .main-section {
   height: 54vh;
-  padding: 2vw 4vw;
+  padding: 2vw 5vw;
   display: grid;
   grid-template-columns: repeat(2, auto);
   grid-template-rows: repeat(4, 12vh);
@@ -90,9 +102,9 @@ header h1 {
   align-content: center;
 }
 .input-control {
-  margin: 0.5rem;
   display: flex;
   flex-direction: column;
+  justify-content: center;
   text-align: center;
   font-family: "Poppins", sans-serif;
   outline: none;
@@ -115,10 +127,16 @@ header h1 {
 .input-control input {
   background: transparent;
   border: none;
-  border-bottom: 1px solid lightblue;
   margin: 1rem;
-  padding: 5px;
+  padding: 1vw;
   color: #fff;
+  background: #222;
+  outline: none;
+  font-family: 'Poppins', sans-serif;
+  font-size: 13px;
+}
+.input-control input::placeholder {
+  font-family: 'Poppins', sans-serif;
 }
 button {
   margin: 1rem 0;

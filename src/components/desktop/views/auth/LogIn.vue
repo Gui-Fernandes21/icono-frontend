@@ -6,12 +6,10 @@
       </header>
       <div class="main-section">
         <div class="input-control">
-          <label>Email</label>
-          <input type="email" v-model="email" />
+          <input type="email" v-model="email" placeholder="Email" />
         </div>
         <div class="input-control">
-          <label>Password</label>
-          <input type="password" v-model="secret" />
+          <input type="password" v-model="secret" placeholder="Password" />
         </div>
         <button @click="login">Login</button>
       </div>
@@ -42,7 +40,7 @@ export default {
 
 <style scoped>
 .card {
-  height: 50vh;
+  min-height: 60vh;
   width: 50vw;
   background: #383838;
   border-radius: 20px;
@@ -65,30 +63,31 @@ header h1 {
   letter-spacing: 2px;
 }
 .main-section {
+  height: 54vh;
+  display: grid;
+  grid-template-columns: 22vw;
+  grid-template-rows: repeat(3, 12vh);
+  justify-content: center;
+  align-content: center;
+}
+.input-control {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: center;
-  margin: 1rem 0;
-}
-.input-control {
-  margin: 0.5rem;
-  display: flex;
-  flex-direction: column;
   text-align: center;
-  font-family: "Poppins", sans-serif;
   outline: none;
-}
-.input-control label {
-  color: #fff;
 }
 .input-control input {
   background: transparent;
   border: none;
-  border-bottom: 1px solid lightblue;
   margin: 1rem;
-  padding: 5px;
+  padding: 1vw;
   color: #fff;
+  font-family: "Poppins", sans-serif;
+  background: #222;
+  outline: none;
+  font-family: "Poppins", sans-serif;
+  font-size: 13px;
 }
 button {
   margin: 1rem 0;
@@ -99,6 +98,7 @@ button {
   background: var(--standard-orange);
   border-radius: 10px;
   border: none;
+  place-self: center stretch;
 }
 button:hover {
   background: #ff9900;
