@@ -1,6 +1,8 @@
 import { createStore } from "vuex";
 
-import rootGetters from "./rootGetters.js";
+import getters from "./rootGetters.js";
+import actions from "./rootActions.js";
+import mutations from "./rootMutations.js";
 
 import authModule from "./auth/auth.js";
 
@@ -10,11 +12,9 @@ const store = createStore({
       isMobile: false
     };
   },
-  actions: {},
-  mutations: {},
-  getters: {
-    ...rootGetters
-  },
+  actions,
+  mutations,
+  getters,
   modules: {
     authModule,
   },
