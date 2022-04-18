@@ -16,7 +16,7 @@ export default {
     isMobile() {
       return this.$store.getters.getMobile;
     }
-  }
+  },
 };
 </script>
 
