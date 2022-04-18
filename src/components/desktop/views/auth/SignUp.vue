@@ -110,8 +110,9 @@ export default {
     async signup() {
       const name = this.firstName + " " + this.lastName;
 
-      if (this.secret !== this.confirmSecret)
+      if (this.secret !== this.confirmSecret) {
         return console.log("Passwords do not match!");
+      }
 
       const variables = {
         name,
@@ -132,6 +133,9 @@ export default {
       }
     },
   },
+  computed: {
+    
+  }
 };
 </script>
 
@@ -164,14 +168,14 @@ header h1 {
   /* width: calc(100% - 2vw); */
   /* padding: 2vw 5vw; */
   display: grid;
-  grid-template-columns: repeat(2, auto);
+  grid-template-columns: repeat(2, calc(50% - 2vw));
   grid-template-rows: repeat(4, 12vh);
   grid-template-areas:
     "first last"
     "email email"
     "password confirm"
     "action action";
-  justify-content: stretch;
+  justify-content: center;
   align-content: center;
 }
 .input-control {
