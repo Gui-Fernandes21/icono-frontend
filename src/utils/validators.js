@@ -31,6 +31,7 @@ const validators = {
       return "invalid";
     }
   },
+  emailValidator() {}
 };
 
 function isAlphaNumeric(str) {

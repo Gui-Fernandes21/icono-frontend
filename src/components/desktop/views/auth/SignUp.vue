@@ -56,7 +56,7 @@
 </template>
 
 <script>
-import { nameFieldValidator, passwordValidator } from "../../../../utils/validators.js";
+import { nameFieldValidator, passwordValidator, emailValidator } from "../../../../utils/validators.js";
 
 export default {
   data() {
@@ -78,7 +78,7 @@ export default {
       email: {
         value: "",
         validator: {
-          field: "name",
+          field: "email",
           status: "",
         },
       },
@@ -105,6 +105,9 @@ export default {
       }
       if (field.validator.field === "password") {
         field.validator.status = passwordValidator(field.value);
+      }
+      if (field.validator.field === "email") {
+        field.validator.status = emailValidator(field.value);
       }
     },
     async signup() {
