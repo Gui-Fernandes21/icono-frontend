@@ -5,48 +5,13 @@
         <h1>Sign up</h1>
       </header>
       <div class="main-section">
-        <div class="input-control">
+        <div class="input-control" v-for="field in fields" :key="field">
           <input
-            :class="firstName.validator.status"
-            @blur="validate(firstName)"
-            type="text"
-            v-model="firstName.value"
-            placeholder="First Name"
-          />
-        </div>
-        <div class="input-control">
-          <input
-            :class="lastName.validator.status"
-            @blur="validate(lastName)"
-            type="text"
-            v-model="lastName.value"
-            placeholder="Last Name"
-          />
-        </div>
-        <div class="input-control">
-          <input
-            :class="email.validator.status"
-            type="email"
-            v-model="email.value"
-            placeholder="Email"
-          />
-        </div>
-        <div class="input-control">
-          <input
-            :class="secret.validator.status"
-            @blur="validate(secret)"
-            type="password"
-            v-model="secret.value"
-            placeholder="Password"
-          />
-        </div>
-        <div class="input-control">
-          <input
-            :class="confirmSecret.validator.status"
-            @blur="validate(confirmSecret)"
-            type="password"
-            v-model="confirmSecret.value"
-            placeholder="Confirm Password"
+            :class="field.validator.status"
+            @blur="validate(field)"
+            :type="field.type"
+            v-model="field.value"
+            :placeholder="field.placeholder"
           />
         </div>
         <button @click="test">Sign up</button>
@@ -56,44 +21,60 @@
 </template>
 
 <script>
-import { nameFieldValidator, passwordValidator, emailValidator } from "../../../../utils/validators.js";
+import {
+  nameFieldValidator,
+  passwordValidator,
+  emailValidator,
+} from "../../../../utils/validators.js";
 
 export default {
   data() {
     return {
-      firstName: {
-        value: "",
-        validator: {
-          field: "name",
-          status: "",
+      fields: {
+        firstName: {
+          value: "",
+          type: 'text',
+          placeholder: 'First Name',
+          validator: {
+            field: "name",
+            status: "",
+          },
         },
-      },
-      lastName: {
-        value: "",
-        validator: {
-          field: "name",
-          status: "",
+        lastName: {
+          value: "",
+          type: 'text',
+          placeholder: 'Last Name',
+          validator: {
+            field: "name",
+            status: "",
+          },
         },
-      },
-      email: {
-        value: "",
-        validator: {
-          field: "email",
-          status: "",
+        email: {
+          value: "",
+          type: 'email',
+          placeholder: 'Email',
+          validator: {
+            field: "email",
+            status: "",
+          },
         },
-      },
-      secret: {
-        value: "",
-        validator: {
-          field: "password",
-          status: "",
+        secret: {
+          value: "",
+          type: 'password',
+          placeholder: 'Password',
+          validator: {
+            field: "password",
+            status: "",
+          },
         },
-      },
-      confirmSecret: {
-        value: "",
-        validator: {
-          field: "password",
-          status: "",
+        confirmSecret: {
+          value: "",
+          type: 'password',
+          placeholder: 'Confirm Password',
+          validator: {
+            field: "password",
+            status: "",
+          },
         },
       },
     };
@@ -136,9 +117,7 @@ export default {
       }
     },
   },
-  computed: {
-    
-  }
+  computed: {},
 };
 </script>
 
