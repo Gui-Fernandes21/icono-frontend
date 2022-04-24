@@ -30,11 +30,12 @@ import {
 export default {
   data() {
     return {
+      errorList: [],
       fields: {
         firstName: {
           value: "",
-          type: 'text',
-          placeholder: 'First Name',
+          type: "text",
+          placeholder: "First Name",
           validator: {
             field: "name",
             status: "",
@@ -42,8 +43,8 @@ export default {
         },
         lastName: {
           value: "",
-          type: 'text',
-          placeholder: 'Last Name',
+          type: "text",
+          placeholder: "Last Name",
           validator: {
             field: "name",
             status: "",
@@ -51,8 +52,8 @@ export default {
         },
         email: {
           value: "",
-          type: 'email',
-          placeholder: 'Email',
+          type: "email",
+          placeholder: "Email",
           validator: {
             field: "email",
             status: "",
@@ -60,8 +61,8 @@ export default {
         },
         secret: {
           value: "",
-          type: 'password',
-          placeholder: 'Password',
+          type: "password",
+          placeholder: "Password",
           validator: {
             field: "password",
             status: "",
@@ -69,8 +70,8 @@ export default {
         },
         confirmSecret: {
           value: "",
-          type: 'password',
-          placeholder: 'Confirm Password',
+          type: "password",
+          placeholder: "Confirm Password",
           validator: {
             field: "password",
             status: "",
@@ -81,14 +82,23 @@ export default {
   },
   methods: {
     validate(field) {
+      let validatorResponse;
+
       if (field.validator.field === "name") {
-        field.validator.status = nameFieldValidator(field.value);
+        validatorResponse = nameFieldValidator(field.value);
       }
       if (field.validator.field === "password") {
-        field.validator.status = passwordValidator(field.value);
+        validatorResponse = passwordValidator(field.value);
       }
       if (field.validator.field === "email") {
-        field.validator.status = emailValidator(field.value);
+        validatorResponse = emailValidator(field.value);
+      }
+
+      if (validatorResponse.status == 400) {
+        field.validator.status = validatorResponse.payload;
+        this.errorList.push(validatorResponse);
+      } else {
+        field.validator.status = validatorResponse.payload;
       }
     },
     async signup() {

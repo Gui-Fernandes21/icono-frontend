@@ -1,39 +1,60 @@
+/**
+ * Validators always return a object
+ * 
+ * {
+ *  type: String
+ *  status: Number
+ *  msg: String
+ *  payload: String
+ * }
+ * 
+ */
+
 const validators = {
   nameFieldValidator(value) {
-    let pass = true;
-
-    if (value.length < 3 || value.length == 0) pass = false;
-
     if (value == "") {
-      return "";
+      return {};
     }
 
-    if (pass) {
-      return "valid";
-    } else {
-      return "invalid";
+    if (value.length < 3) {
+      return createResponseObject(
+        'name',
+        400,
+        "invalid",
+        "Your name at least 3 characters long!"
+      );
     }
+
+    return createResponseObject('name', 200, "valid");
   },
   passwordValidator(value) {
-    let pass = true;
     let isAlpha = isAlphaNumeric(value);
 
-    if (value.length < 6 || !isAlpha) pass = false;
-    if (!/\d/.test(value)) pass = false;
-
     if (value == "") {
-      return "";
+      return {};
+    }
+    if (value.length < 6 || !isAlpha) {
+      return createResponseObject(
+        'password',
+        400,
+        "invalid",
+        "Your password must be alphanumeric and at least 6 characters in length!"
+      );
+    }
+    if (!/\d/.test(value)) {
+      return createResponseObject(
+        'password',
+        400,
+        "invalid",
+        "Your password must be alphanumeric!"
+      );
     }
 
-    if (pass) {
-      return "valid";
-    } else {
-      return "invalid";
-    }
+    return createResponseObject('password', 200, "valid");
   },
   emailValidator(value) {
     if (value == "") {
-      return "";
+      return {};
     }
 
     const pass = String(value)
@@ -43,9 +64,14 @@ const validators = {
       );
 
     if (pass) {
-      return "valid";
+      return createResponseObject('email', 200, "valid");
     } else {
-      return "invalid";
+      return createResponseObject(
+        'email',
+        400,
+        "invalid",
+        "Please Choose a Valid Email!"
+      );
     }
   },
 };
@@ -65,6 +91,15 @@ function isAlphaNumeric(str) {
     }
   }
   return true;
+}
+
+function createResponseObject(type, status, payload, msg = "") {
+  return {
+    type,
+    status,
+    msg,
+    payload,
+  };
 }
 
 module.exports = validators;
