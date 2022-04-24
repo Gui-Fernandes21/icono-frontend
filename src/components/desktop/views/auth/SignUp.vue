@@ -96,10 +96,36 @@ export default {
 
       if (validatorResponse.status == 400) {
         field.validator.status = validatorResponse.payload;
-        this.errorList.push(validatorResponse);
+
+        if (this.errorExists(field)) return;
+
+        const error = { ...validatorResponse, field: field.placeholder };
+        this.errorList.push(error);
+        console.log(this.errorList)
       } else {
+
+        if (this.errorExists(field)) {
+          console.log('here')
+          this.errorList = this.errorList.filter((err) => err.field !== field.placeholder);
+        }
+
         field.validator.status = validatorResponse.payload;
+        console.log(this.errorList)
       }
+    },
+    errorExists(field) {
+      let exist = false;
+      
+      this.errorList.forEach((err) => {
+        if (err.field === field.placeholder) {
+          exist = true;
+        }
+      });
+
+      console.log(exist)
+
+      return exist
+
     },
     async signup() {
       const name = this.firstName + " " + this.lastName;

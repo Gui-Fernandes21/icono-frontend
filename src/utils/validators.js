@@ -1,60 +1,57 @@
 /**
  * Validators always return a object
- * 
+ *
  * {
  *  type: String
  *  status: Number
  *  msg: String
  *  payload: String
  * }
- * 
+ *
  */
 
 const validators = {
   nameFieldValidator(value) {
     if (value == "") {
-      return {};
+      return { status: 200, payload: "" };
     }
 
     if (value.length < 3) {
       return createResponseObject(
-        'name',
         400,
         "invalid",
         "Your name at least 3 characters long!"
       );
     }
 
-    return createResponseObject('name', 200, "valid");
+    return createResponseObject(200, "valid");
   },
   passwordValidator(value) {
     let isAlpha = isAlphaNumeric(value);
 
     if (value == "") {
-      return {};
+      return { status: 200, payload: "" };
     }
     if (value.length < 6 || !isAlpha) {
       return createResponseObject(
-        'password',
         400,
         "invalid",
-        "Your password must be alphanumeric and at least 6 characters in length!"
+        "Your password must not contain special characters, contain numbers, and be at least 6 characters in length!"
       );
     }
     if (!/\d/.test(value)) {
       return createResponseObject(
-        'password',
         400,
         "invalid",
-        "Your password must be alphanumeric!"
+        "Your password must not contain special characters and contain numbers."
       );
     }
 
-    return createResponseObject('password', 200, "valid");
+    return createResponseObject(200, "valid");
   },
   emailValidator(value) {
     if (value == "") {
-      return {};
+      return { status: 200, payload: "" };
     }
 
     const pass = String(value)
@@ -64,10 +61,9 @@ const validators = {
       );
 
     if (pass) {
-      return createResponseObject('email', 200, "valid");
+      return createResponseObject(200, "valid");
     } else {
       return createResponseObject(
-        'email',
         400,
         "invalid",
         "Please Choose a Valid Email!"
@@ -93,9 +89,8 @@ function isAlphaNumeric(str) {
   return true;
 }
 
-function createResponseObject(type, status, payload, msg = "") {
+function createResponseObject(status, payload, msg = "") {
   return {
-    type,
     status,
     msg,
     payload,
