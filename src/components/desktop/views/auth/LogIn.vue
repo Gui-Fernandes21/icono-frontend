@@ -6,10 +6,22 @@
       </header>
       <div class="main-section">
         <div class="input-control">
-          <input type="email" v-model="email" placeholder="Email" />
+          <input
+            :class="fields.email.validator.status"
+            @blur="validate(fields.email)"
+            :type="fields.email.type"
+            v-model="fields.email.value"
+            :placeholder="fields.email.placeholder"
+          />
         </div>
         <div class="input-control">
-          <input type="password" v-model="secret" placeholder="Password" />
+          <input
+            :class="fields.secret.validator.status"
+            @blur="validate(fields.secret)"
+            :type="fields.secret.type"
+            v-model="fields.secret.value"
+            :placeholder="fields.secret.placeholder"
+          />
         </div>
         <button @click="login">Login</button>
       </div>
@@ -18,13 +30,11 @@
 </template>
 
 <script>
+import authMixin from "./authMixins.js";
+
 export default {
-  data() {
-    return {
-      email: "",
-      secret: "",
-    };
-  },
+  mixins: [authMixin],
+  data() {},
   methods: {
     async login() {
       const variables = {
@@ -102,5 +112,14 @@ button {
 }
 button:hover {
   background: #ff9900;
+}
+.input-control input::placeholder {
+  font-family: "Poppins", sans-serif;
+}
+.input-control input.invalid {
+  border-bottom: 1px solid red;
+}
+.input-control input.valid {
+  border-bottom: 1px solid greenyellow;
 }
 </style>

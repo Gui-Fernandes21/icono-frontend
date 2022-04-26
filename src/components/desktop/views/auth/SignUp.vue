@@ -14,14 +14,14 @@
             :placeholder="field.placeholder"
           />
         </div>
-        <button @click="test">Sign up</button>
+        <button @click="signup">Sign up</button>
       </div>
     </div>
     <div class="errors-wrapper" v-if="errorList.length > 0">
       <ul>
         <li v-for="error in errorList" :key="error">
           <h1>In "{{ error.field }}":</h1>
-          <p>{{error.msg}}</p>
+          <p>{{ error.msg }}</p>
         </li>
       </ul>
     </div>
@@ -29,117 +29,26 @@
 </template>
 
 <script>
-import {
-  nameFieldValidator,
-  passwordValidator,
-  emailValidator,
-} from "../../../../utils/validators.js";
+
+import authMixin from './authMixins.js';
 
 export default {
-  data() {
-    return {
-      errorList: [],
-      fields: {
-        firstName: {
-          value: "",
-          type: "text",
-          placeholder: "First Name",
-          validator: {
-            field: "name",
-            status: "",
-          },
-        },
-        lastName: {
-          value: "",
-          type: "text",
-          placeholder: "Last Name",
-          validator: {
-            field: "name",
-            status: "",
-          },
-        },
-        email: {
-          value: "",
-          type: "email",
-          placeholder: "Email",
-          validator: {
-            field: "email",
-            status: "",
-          },
-        },
-        secret: {
-          value: "",
-          type: "password",
-          placeholder: "Password",
-          validator: {
-            field: "password",
-            status: "",
-          },
-        },
-        confirmSecret: {
-          value: "",
-          type: "password",
-          placeholder: "Confirm Password",
-          validator: {
-            field: "password",
-            status: "",
-          },
-        },
-      },
-    };
-  },
+  mixins: [authMixin],
+  data() {},
   methods: {
-    validate(field) {
-      let validatorResponse;
-
-      if (field.validator.field === "name") {
-        validatorResponse = nameFieldValidator(field.value);
-      }
-      if (field.validator.field === "password") {
-        validatorResponse = passwordValidator(field.value);
-      }
-      if (field.validator.field === "email") {
-        validatorResponse = emailValidator(field.value);
-      }
-
-      if (validatorResponse.status == 400) {
-        field.validator.status = validatorResponse.payload;
-
-        if (this.errorExists(field)) return;
-
-        const error = { ...validatorResponse, field: field.placeholder };
-        this.errorList.push(error);
-        console.log(this.errorList)
-      } else {
-
-        if (this.errorExists(field)) {
-          console.log('here')
-          this.errorList = this.errorList.filter((err) => err.field !== field.placeholder);
-        }
-
-        field.validator.status = validatorResponse.payload;
-        console.log(this.errorList)
-      }
-    },
-    errorExists(field) {
-      let exist = false;
-      
-      this.errorList.forEach((err) => {
-        if (err.field === field.placeholder) {
-          exist = true;
-        }
-      });
-
-      console.log(exist)
-
-      return exist
-
-    },
     async signup() {
       const name = this.firstName + " " + this.lastName;
 
-      if (this.secret !== this.confirmSecret) {
-        return console.log("Passwords do not match!");
+      if (this.fields.secret.value !== this.fields.confirmSecret.value) {
+        this.errorList.push({
+          status: 400,
+          msg: "Passwords must match",
+          payload: "",
+          field: "Passwords",
+        });
+        this.fields.secret.validator.status = "invalid";
+        this.fields.confirmSecret.validator.status = "invalid";
+        return;
       }
 
       const variables = {
@@ -266,11 +175,11 @@ button:hover {
   position: relative;
 }
 .errors-wrapper {
-  font-family: 'Poppins', sans-serif;
+  font-family: "Poppins", sans-serif;
   position: absolute;
   right: -40%;
   top: 25%;
-  z-index: 300;  
+  z-index: 300;
   padding: 2rem;
   background: rgba(255, 107, 107, 0.65);
   border-radius: 10px;
@@ -279,12 +188,12 @@ button:hover {
 .errors-wrapper ul li {
   list-style: none;
   text-align: center;
-  margin: 0.5rem 0;
+  margin: 0.7rem 0;
 }
 .errors-wrapper ul li h1 {
   font-size: 1rem;
 }
 .errors-wrapper ul li p {
-  font-size: .7rem;
+  font-size: 0.7rem;
 }
 </style>
