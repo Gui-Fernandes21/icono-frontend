@@ -1,5 +1,5 @@
 <template>
-  <section>
+  <section id="signup-wrapper">
     <div class="card">
       <header>
         <h1>Sign up</h1>
@@ -16,6 +16,14 @@
         </div>
         <button @click="test">Sign up</button>
       </div>
+    </div>
+    <div class="errors-wrapper" v-if="errorList.length > 0">
+      <ul>
+        <li v-for="error in errorList" :key="error">
+          <h1>In "{{ error.field }}":</h1>
+          <p>{{error.msg}}</p>
+        </li>
+      </ul>
     </div>
   </section>
 </template>
@@ -253,5 +261,30 @@ button {
 }
 button:hover {
   background: #ff9900;
+}
+#signup-wrapper {
+  position: relative;
+}
+.errors-wrapper {
+  font-family: 'Poppins', sans-serif;
+  position: absolute;
+  right: -40%;
+  top: 25%;
+  z-index: 300;  
+  padding: 2rem;
+  background: rgba(255, 107, 107, 0.65);
+  border-radius: 10px;
+  max-width: 35%;
+}
+.errors-wrapper ul li {
+  list-style: none;
+  text-align: center;
+  margin: 0.5rem 0;
+}
+.errors-wrapper ul li h1 {
+  font-size: 1rem;
+}
+.errors-wrapper ul li p {
+  font-size: .7rem;
 }
 </style>

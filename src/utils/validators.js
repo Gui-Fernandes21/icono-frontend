@@ -2,7 +2,6 @@
  * Validators always return a object
  *
  * {
- *  type: String
  *  status: Number
  *  msg: String
  *  payload: String
@@ -36,14 +35,14 @@ const validators = {
       return createResponseObject(
         400,
         "invalid",
-        "Your password must not contain special characters, contain numbers, and be at least 6 characters in length!"
+        "Your password must NOT contain special characters, it HAS TO contain numbers, and be at least 6 characters in length!"
       );
     }
     if (!/\d/.test(value)) {
       return createResponseObject(
         400,
         "invalid",
-        "Your password must not contain special characters and contain numbers."
+        "Your password must NOT contain special characters and MUST contain numbers."
       );
     }
 
