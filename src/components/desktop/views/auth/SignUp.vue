@@ -37,7 +37,7 @@ export default {
   data() {},
   methods: {
     async signup() {
-      const name = this.firstName + " " + this.lastName;
+      const name = this.fields.firstName.value + " " + this.fields.lastName.value;
 
       if (this.fields.secret.value !== this.fields.confirmSecret.value) {
         this.errorList.push({
@@ -53,8 +53,8 @@ export default {
 
       const variables = {
         name,
-        email: this.email,
-        secret: this.secret,
+        email: this.fields.email.value,
+        secret: this.fields.secret.value,
       };
 
       const answer = await this.$store.dispatch("signup", variables);
@@ -62,11 +62,13 @@ export default {
       console.log(answer);
 
       if (answer.msg === "ok") {
-        this.firstName = "";
-        this.lastName = "";
-        this.email = "";
-        this.secret = "";
-        this.confirmSecret = "";
+        this.fields.firstName.value = "";
+        this.fields.lastName.value = "";
+        this.fields.email.value = "";
+        this.fields.secret.value = "";
+        this.fields.confirmSecret.value = "";
+
+        this.$router.push('/home');
       }
     },
   },

@@ -8,7 +8,6 @@
         <div class="input-control">
           <input
             :class="fields.email.validator.status"
-            @blur="validate(fields.email)"
             :type="fields.email.type"
             v-model="fields.email.value"
             :placeholder="fields.email.placeholder"
@@ -17,7 +16,6 @@
         <div class="input-control">
           <input
             :class="fields.secret.validator.status"
-            @blur="validate(fields.secret)"
             :type="fields.secret.type"
             v-model="fields.secret.value"
             :placeholder="fields.secret.placeholder"
@@ -38,11 +36,18 @@ export default {
   methods: {
     async login() {
       const variables = {
-        email: this.email,
-        secret: this.secret,
+        email: this.fields.email.value,
+        secret: this.fields.secret.value,
       };
 
-      this.$store.dispatch("login", variables);
+      const answer = await this.$store.dispatch("login", variables);
+    
+      if (answer.msg === "ok") {
+        this.fields.email.value = "";
+        this.fields.secret.value = "";
+
+        this.$router.push('/home');
+      }
     },
   },
 };

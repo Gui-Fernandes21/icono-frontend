@@ -1,8 +1,8 @@
 export default {
   async signup({ commit }, variables) {
     const query = `
-      mutation($input: SignupInput!) {
-        signup(data: $input) {
+      mutation($data: SignupInput!) {
+        signup(data: $data) {
           token
           userId
         }
@@ -10,7 +10,7 @@ export default {
 
     const payload = {
       query: query,
-      variables: { input: variables },
+      variables: { data: variables },
     };
 
     const result = await fetch("http://localhost:4001/graphql", {
@@ -22,7 +22,7 @@ export default {
     });
 
     if (!result.ok) {
-      throw new Error("Error on the request: " + result);
+      throw new Error("Error on the request: " + result.json());
     }
 
     // data is returned deeply nested
@@ -68,4 +68,7 @@ export default {
 
     return { msg: "ok", status: 200 };
   },
+  logout({ commit }) {
+    commit('logout')
+  } 
 };
