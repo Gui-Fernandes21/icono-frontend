@@ -19,8 +19,8 @@
     </div>
     <div class="errors-wrapper" v-if="errorList.length > 0">
       <ul>
+        <li class="icon"><ion-icon name="warning-outline"></ion-icon></li>
         <li v-for="error in errorList" :key="error">
-          <h1>In "{{ error.field }}":</h1>
           <p>{{ error.msg }}</p>
         </li>
       </ul>
@@ -29,8 +29,7 @@
 </template>
 
 <script>
-
-import authMixin from './authMixins.js';
+import authMixin from "./authMixins.js";
 
 export default {
   mixins: [authMixin],
@@ -68,7 +67,7 @@ export default {
         this.fields.secret.value = "";
         this.fields.confirmSecret.value = "";
 
-        this.$router.push('/home');
+        this.$router.push("/home");
       }
     },
   },
@@ -147,7 +146,7 @@ header h1 {
   background: #222;
   outline: none;
   font-family: "Poppins", sans-serif;
-  font-size: 13px;
+  font-size: 16px;
 }
 .input-control input::placeholder {
   font-family: "Poppins", sans-serif;
@@ -160,7 +159,7 @@ header h1 {
 }
 button {
   margin: 1rem;
-  padding: 15px 25px;
+  padding: 16px 25px;
   cursor: pointer;
   font-family: "Oswald", sans-serif;
   font-weight: 800;
@@ -169,6 +168,7 @@ button {
   border: none;
   grid-area: action;
   place-self: center stretch;
+  font-size: 17px;
 }
 button:hover {
   background: #ff9900;
@@ -179,11 +179,11 @@ button:hover {
 .errors-wrapper {
   font-family: "Poppins", sans-serif;
   position: absolute;
-  right: -40%;
+  right: -37%;
   top: 25%;
   z-index: 300;
   padding: 2rem;
-  background: rgba(255, 107, 107, 0.65);
+  background: rgba(255, 73, 73, 0.65);
   border-radius: 10px;
   max-width: 35%;
 }
@@ -193,9 +193,12 @@ button:hover {
   margin: 0.7rem 0;
 }
 .errors-wrapper ul li h1 {
-  font-size: 1rem;
+  font-size: 2rem;
 }
 .errors-wrapper ul li p {
-  font-size: 0.7rem;
+  font-size: 1rem;
+}
+.icon {
+  font-size: 3rem;
 }
 </style>

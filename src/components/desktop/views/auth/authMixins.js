@@ -2,7 +2,7 @@ import {
   nameFieldValidator,
   passwordValidator,
   emailValidator,
-} from "../../../../utils/validators.js";
+} from "@/utils/validators.js";
 
 export default {
   data() {

@@ -102,11 +102,12 @@ header h1 {
   background: #222;
   outline: none;
   font-family: "Poppins", sans-serif;
-  font-size: 13px;
+  font-size: 18px;
 }
 button {
   margin: 1rem 0;
-  padding: 15px 25px;
+  padding: 17px 25px;
+  font-size: 16px;
   cursor: pointer;
   font-family: "Oswald", sans-serif;
   font-weight: 800;
