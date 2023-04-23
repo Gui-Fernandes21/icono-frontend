@@ -11,14 +11,15 @@
   </section>
 </template>
 
-<style scoped>
+<style scoped lang="scss">
+@import '@/styles/base/settings';
 section {
   max-width: 80vw;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  color: var(--standard-orange);
+  color: $base-orange;
 }
 section h1 {
   font-size: 5vw;
@@ -38,14 +39,14 @@ section h3 {
 .actions a {
   margin: 2vw 1vw;
   text-decoration: none;
-  color: var(--standard-orange);
+  color: $base-orange;
   padding: 0.5vw 2vw;
-  border: 1px solid var(--standard-orange);
+  border: 1px solid $base-orange;
   font-family: 'Poppins';
   font-size: 0.8vw;
 }
 .actions a:hover {
-  background: var(--standard-orange);
+  background: $base-orange;
   color: #222;
 }
 </style>

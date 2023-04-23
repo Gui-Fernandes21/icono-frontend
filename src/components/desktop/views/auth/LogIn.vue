@@ -53,7 +53,8 @@ export default {
 };
 </script>
 
-<style scoped>
+<style scoped lang="scss">
+@import '@/styles/base/settings';
 .card {
   min-height: 60vh;
   width: 50vw;
@@ -63,7 +64,7 @@ export default {
 header {
   height: 4rem;
   width: 100%;
-  background: var(--standard-orange);
+  background: $base-orange;
   display: flex;
   align-items: center;
   font-family: "Oswald", sans-serif;
@@ -111,7 +112,7 @@ button {
   cursor: pointer;
   font-family: "Oswald", sans-serif;
   font-weight: 800;
-  background: var(--standard-orange);
+  background: $base-orange;
   border-radius: 10px;
   border: none;
   place-self: center stretch;

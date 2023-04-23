@@ -33,7 +33,8 @@ export default {
 }
 </script>
 
-<style scoped>
+<style scoped lang="scss">
+@import '@/styles/base/settings';
 .logo {
   text-transform: uppercase;
   font-size: 3vh;
@@ -51,7 +52,7 @@ nav {
   background: #000;
 }
 a {
-  color: var(--standard-orange);
+  color: $base-orange;
   text-decoration: none;
   font-family: "Poppins", sans-serif;
 }
@@ -73,6 +74,6 @@ ul li a {
 }
 ul li a:hover,
 ul li a.active {
-  border-bottom: 1px solid var(--standard-orange);
+  border-bottom: 1px solid $base-orange;
 }
 </style>

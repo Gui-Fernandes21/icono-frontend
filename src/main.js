@@ -4,6 +4,9 @@ import App from './App.vue'
 import store from './store/index.js'
 import router from './router/index.js'
 
+import 'normalize.css';
+import '@/styles/styles.scss';
+
 const app = createApp(App);
 
 app.use(store);
