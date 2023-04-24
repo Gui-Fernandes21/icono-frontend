@@ -24,6 +24,5 @@ main {
   align-items: center;
   min-height: 95vh;
 
-  margin-bottom: 1500px;
 }
 </style>

@@ -9,7 +9,10 @@
 				<router-link :to="'/login'" active-class="active">Login</router-link>
 			</li>
 			<li v-if="!auth">
-				<router-link :to="'/signup'" active-class="active">Sign up</router-link>
+				<router-link :to="'/signup'" active-class="active">Signup</router-link>
+			</li>
+      <li v-if="auth">
+				<router-link :to="'/dashboard'" active-class="active">Dashboard</router-link>
 			</li>
 			<li v-if="auth">
 				<a active-class="active" @click="logout">Logout</a>
@@ -27,7 +30,9 @@ export default {
 		},
 	},
 	methods: {
-		logout() {},
+		logout() {
+      this.$store.commit('logout')
+    },
 	},
 };
 </script>
@@ -62,6 +67,7 @@ a {
 	font-family: "Poppins", sans-serif;
 	float: left;
 	display: block;
+  word-break: keep-all;
 }
 ul {
 	display: flex;

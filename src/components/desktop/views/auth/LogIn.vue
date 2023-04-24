@@ -57,12 +57,7 @@ export default {
 
 <style scoped lang="scss">
 @import "@/styles/base/settings";
-.card {
-	min-height: 60vh;
-	width: 50vw;
-	background: #383838;
-	border-radius: 20px;
-}
+
 header {
 	height: $xl-size;
 	width: 100%;

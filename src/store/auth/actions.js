@@ -25,7 +25,6 @@ export default {
       throw new Error("Error on the request: " + result.json());
     }
 
-    // data is returned deeply nested
     const { data } = await result.json();
 
     await commit("authenticate", data.signup);

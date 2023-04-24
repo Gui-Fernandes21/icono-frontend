@@ -79,12 +79,6 @@ export default {
 
 <style scoped lang="scss">
 @import "@/styles/base/settings";
-.card {
-	min-height: 60vh;
-	width: 50vw;
-	background: rgb(56, 56, 56);
-	border-radius: 20px;
-}
 header {
 	height: 6vh;
 	width: 100%;
