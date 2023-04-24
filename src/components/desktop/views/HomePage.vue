@@ -5,8 +5,8 @@
       <h1>ICONO</h1>
     </header>
     <div class="actions">
-      <router-link :to="'/signup'">Sign up</router-link>
-      <router-link :to="'/login'">Login</router-link>
+      <router-link class="small-button" :to="'/signup'">Sign up</router-link>
+      <router-link class="small-button" :to="'/login'">Login</router-link>
     </div>
   </section>
 </template>
@@ -35,18 +35,5 @@ section h3 {
 }
 .actions{
   margin: 1vw 0;
-}
-.actions a {
-  margin: 2vw 1vw;
-  text-decoration: none;
-  color: $base-orange;
-  padding: 0.5vw 2vw;
-  border: 1px solid $base-orange;
-  font-family: 'Poppins';
-  font-size: 0.8vw;
-}
-.actions a:hover {
-  background: $base-orange;
-  color: #222;
 }
 </style>

@@ -1,0 +1,29 @@
+.big-button {
+  margin: 1rem 0;
+  padding: 17px 25px;
+  font-size: 16px;
+  cursor: pointer;
+  font-family: "Oswald", sans-serif;
+  font-weight: 400;
+  background: $base-orange;
+  border-radius: 10px;
+  border: none;
+  place-self: center stretch;
+}
+.big-button:hover {
+  background: #ff9900;
+}
+
+.small-button {
+  margin: 2vw 1vw;
+  text-decoration: none;
+  color: $base-orange;
+  padding: 0.5vw 2vw;
+  border: 1px solid $base-orange;
+  font-family: 'Poppins';
+  font-size: 0.8vw;
+}
+.small-button:hover {
+  background: $base-orange;
+  color: #222;
+}

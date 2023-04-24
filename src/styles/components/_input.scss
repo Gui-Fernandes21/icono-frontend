@@ -1,0 +1,31 @@
+.input-control {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+  outline: none;
+}
+
+.input-control__input {
+  background: transparent;
+  border: none;
+  margin: 1rem;
+  padding: 1vw;
+  color: #fff;
+  font-family: "Poppins", sans-serif;
+  background: #222;
+  outline: none;
+  font-family: "Poppins", sans-serif;
+  font-size: $m-size;
+  border-bottom: 1px solid darken($color: $base-orange, $amount: 10%);
+}
+
+.input-control__input::placeholder {
+  font-family: "Poppins", sans-serif;
+}
+.input-control__input.invalid {
+  border-bottom: 1px solid red;
+}
+.input-control__input.valid {
+  border-bottom: 1px solid greenyellow;
+}

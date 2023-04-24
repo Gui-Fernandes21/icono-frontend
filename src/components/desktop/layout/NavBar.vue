@@ -34,7 +34,8 @@ export default {
 </script>
 
 <style scoped lang="scss">
-@import '@/styles/base/settings';
+@import "@/styles/base/settings";
+
 .logo {
   text-transform: uppercase;
   font-size: 3vh;
