@@ -19,8 +19,11 @@ export default {
 
 <style scoped>
 main {
-  display: grid;
-  place-items: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   min-height: 95vh;
+
+  margin-bottom: 1500px;
 }
 </style>
