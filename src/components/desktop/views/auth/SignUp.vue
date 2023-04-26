@@ -1,7 +1,7 @@
 <template>
 	<section id="signup-wrapper">
-		<div class="card">
-			<header>
+		<div class="">
+			<header class="auth-section__header">
 				<h1>Sign up</h1>
 			</header>
 			<div class="main-section">
@@ -20,7 +20,7 @@
 		</div>
 		<div class="errors-wrapper" v-if="errorList.length > 0">
 			<ul>
-				<li class="icon"><ion-icon name="warning-outline"></ion-icon></li>
+				<li class="icon"><ion-icon name="warning-outline" /></li>
 				<li v-for="error in errorList" :key="error">
 					<p>{{ error.msg }}</p>
 				</li>
@@ -79,30 +79,10 @@ export default {
 
 <style scoped lang="scss">
 @import "@/styles/base/settings";
-header {
-	height: 6vh;
-	width: 100%;
-	background: $base-orange;
-	display: flex;
-	align-items: center;
-	font-family: "Oswald", sans-serif;
-	border-top-right-radius: 20px;
-	border-top-left-radius: 20px;
-}
-header h1 {
-	text-transform: uppercase;
-	font-weight: 900;
-	font-size: 1.5rem;
-	margin: 1rem;
-	letter-spacing: 2px;
-}
 .main-section {
-	height: 54vh;
-	/* width: calc(100% - 2vw); */
-	/* padding: 2vw 5vw; */
 	display: grid;
-	grid-template-columns: repeat(2, calc(50% - 2vw));
 	grid-template-rows: repeat(4, 12vh);
+  gap: 0 1rem;
 	grid-template-areas:
 		"first last"
 		"email email"

@@ -1,7 +1,7 @@
 <template>
 	<section>
-		<div class="card">
-			<header>
+		<div class="">
+			<header class="auth-section__header">
 				<h1>Login</h1>
 			</header>
 			<div class="main-section">
@@ -22,6 +22,12 @@
 						v-model="fields.secret.value"
 						:placeholder="fields.secret.placeholder"
 					/>
+					<span class="auth-section__span"
+						>Don't have an account yet?
+						<router-link class="auth-section__span--link" to="/signup"
+							>click here!</router-link
+						></span
+					>
 				</div>
 				<button class="big-button" @click="login">Login</button>
 			</div>
@@ -58,25 +64,7 @@ export default {
 <style scoped lang="scss">
 @import "@/styles/base/settings";
 
-header {
-	height: $xl-size;
-	width: 100%;
-	background: $base-orange;
-	display: flex;
-	align-items: center;
-	font-family: "Oswald", sans-serif;
-	border-top-right-radius: 20px;
-	border-top-left-radius: 20px;
-}
-header h1 {
-	text-transform: uppercase;
-	font-weight: 800;
-	font-size: 2.5rem;
-	margin: $l-size;
-	// letter-spacing: 1px;
-}
 .main-section {
-	height: 54vh;
 	display: grid;
 	grid-template-columns: 22vw;
 	grid-template-rows: repeat(3, 12vh);

@@ -3,16 +3,16 @@
 		<a href="/home" class="logo">icono</a>
 		<ul>
 			<li>
-				<router-link :to="'/home'" active-class="active">Home</router-link>
+				<router-link to='/home' active-class="active">Home</router-link>
 			</li>
 			<li v-if="!auth">
-				<router-link :to="'/login'" active-class="active">Login</router-link>
+				<router-link to="/login" active-class="active">Login</router-link>
 			</li>
 			<li v-if="!auth">
-				<router-link :to="'/signup'" active-class="active">Signup</router-link>
+				<router-link to='/signup' active-class="active">Signup</router-link>
 			</li>
       <li v-if="auth">
-				<router-link :to="'/dashboard'" active-class="active">Dashboard</router-link>
+				<router-link to='/dashboard' active-class="active">Dashboard</router-link>
 			</li>
 			<li v-if="auth">
 				<a active-class="active" @click="logout">Logout</a>

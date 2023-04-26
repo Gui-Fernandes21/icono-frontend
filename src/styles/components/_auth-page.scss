@@ -1,0 +1,58 @@
+.auth-container {
+	width: 100%;
+	height: 100vh;
+	display: flex;
+}
+
+.auth-section {
+	align-items: center;
+	background: $light-base-color;
+	display: flex;
+	justify-content: center;
+	width: 60%;
+}
+
+.auth-section__header {
+	height: $xl-size;
+	width: 100%;
+	display: flex;
+	align-items: center;
+	font-family: "Oswald", sans-serif;
+	margin: $m-size 0;
+
+	h1 {
+		text-transform: uppercase;
+		font-weight: 800;
+		font-size: 2.5rem;
+		margin: $l-size 0;
+		color: #fff;
+		border-bottom: 2px solid $base-orange;
+	}
+}
+
+.auth-section__span {
+	height: $s-size;
+	color: #fff;
+	font-family: $default-font;
+}
+
+.auth-section__span--link {
+	color: darken($base-orange, 10%);
+	font-family: $default-font;
+}
+
+.logo-section {
+	align-items: center;
+	display: flex;
+	justify-content: center;
+	text-transform: uppercase;
+	width: 40%;
+  
+  h1 {
+    color: $base-orange;
+    letter-spacing: $s-size;
+    font-family: $logo-font;
+    font-size: $xl-size;
+    user-select: none;
+  }
+}
