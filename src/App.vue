@@ -20,13 +20,31 @@ export default {
 			isMobile: this.$store.getters.getMobile,
 		};
 	},
+	beforeMount() {
+		this.checkAuth();
+	},
 	beforeCreate() {
 		this.$store.dispatch("checkMobile");
+	},
+	methods: {
+		checkAuth() {
+			const authToken = localStorage.getItem("auth-token");
+			const userId = localStorage.getItem("auth-userId");
+
+			if (!authToken || !userId) return;
+
+			const authObject = {
+				token: authToken,
+				userId
+			}
+
+			this.$store.commit('authenticate', authObject);
+		},
 	},
 };
 </script>
 
 <style>
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&family=Russo+One&display=swap");
-@import '@/styles/styles.scss';
+@import "@/styles/styles.scss";
 </style>

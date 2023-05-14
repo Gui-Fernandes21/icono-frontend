@@ -1,6 +1,6 @@
 export default {
-  async signup({ commit }, variables) {
-    const query = `
+	async signup({ commit }, variables) {
+		const query = `
       mutation($data: SignupInput!) {
         signup(data: $data) {
           token
@@ -8,31 +8,31 @@ export default {
         }
       }`;
 
-    const payload = {
-      query: query,
-      variables: { data: variables },
-    };
+		const payload = {
+			query: query,
+			variables: { data: variables },
+		};
 
-    const result = await fetch("http://localhost:4001/graphql", {
-      headers: {
-        "Content-Type": "application/json",
-      },
-      method: "POST",
-      body: JSON.stringify(payload),
-    });
+		const result = await fetch("http://localhost:4001/graphql", {
+			headers: {
+				"Content-Type": "application/json",
+			},
+			method: "POST",
+			body: JSON.stringify(payload),
+		});
 
-    if (!result.ok) {
-      throw new Error("Error on the request: " + result.json());
-    }
+		if (!result.ok) {
+			throw new Error("Error on the request: " + result.json());
+		}
 
-    const { data } = await result.json();
+		const { data } = await result.json();
 
-    await commit("authenticate", data.signup);
+		await commit("authenticate", data.signup);
 
-    return { msg: "ok", status: 200 };
-  },
-  async login({ commit }, variables) {
-    const query = `
+		return { msg: "ok", status: 200 };
+	},
+	async login({ commit }, variables) {
+		const query = `
       mutation Login($data: LoginInput!) {
         login(data: $data) {
           token
@@ -41,33 +41,41 @@ export default {
       }
     `;
 
-    const payload = {
-      query,
-      variables: { data: variables },
-    };
+		const payload = {
+			query,
+			variables: { data: variables },
+		};
 
-    const result = await fetch("http://localhost:4001/graphql", {
-      headers: {
-        "Content-Type": "application/json",
-      },
-      method: "POST",
-      body: JSON.stringify(payload),
-    });
+		const result = await fetch("http://localhost:4001/graphql", {
+			headers: {
+				"Content-Type": "application/json",
+			},
+			method: "POST",
+			body: JSON.stringify(payload),
+		});
 
-    if (!result.ok) {
-      throw new Error("Error on the request: " + result);
-    }
+		if (!result.ok) {
+			throw new Error("Error on the request: " + result);
+		}
 
-    // data is returned deeply nested
-    const { data } = await result.json();
+		// data is returned deeply nested
+		const { data } = await result.json();
 
-    console.log(data);
+		if (!data) {
+			console.log("Error in authentication");
+			return;
+		}
 
-    await commit("authenticate", data.login);
+		await commit("authenticate", data.login);
 
-    return { msg: "ok", status: 200 };
-  },
-  logout({ commit }) {
-    commit('logout')
-  } 
+		localStorage.setItem('auth-token', data.login.token);
+		localStorage.setItem('auth-userId', data.login.userId);
+
+		return { msg: "ok", status: 200 };
+	},
+	logout({ commit }) {
+		localStorage.removeItem('auth-token');
+		localStorage.removeItem('auth-userId');
+		commit("logout");
+	},
 };

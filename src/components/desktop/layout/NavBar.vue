@@ -2,7 +2,7 @@
 	<nav id="navbar">
 		<a href="/home" class="logo">icono</a>
 		<ul>
-			<li>
+			<li v-if="!auth">
 				<router-link to='/home' active-class="active">Home</router-link>
 			</li>
 			<li v-if="!auth">
@@ -31,7 +31,8 @@ export default {
 	},
 	methods: {
 		logout() {
-      this.$store.commit('logout')
+      this.$store.dispatch('logout');
+			this.$router.replace('/home');
     },
 	},
 };

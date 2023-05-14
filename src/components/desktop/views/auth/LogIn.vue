@@ -12,6 +12,7 @@
 						:type="fields.email.type"
 						v-model="fields.email.value"
 						:placeholder="fields.email.placeholder"
+						@keyup.enter="login"
 					/>
 				</div>
 				<div class="input-control">
@@ -21,6 +22,7 @@
 						:type="fields.secret.type"
 						v-model="fields.secret.value"
 						:placeholder="fields.secret.placeholder"
+						@keyup.enter="login"
 					/>
 					<span class="auth-section__span"
 						>Don't have an account yet?
@@ -50,11 +52,13 @@ export default {
 
 			const answer = await this.$store.dispatch("login", variables);
 
+			if (!answer) return;
+
 			if (answer.msg === "ok") {
 				this.fields.email.value = "";
 				this.fields.secret.value = "";
 
-				this.$router.push("/home");
+				this.$router.push("/dashboard");
 			}
 		},
 	},
