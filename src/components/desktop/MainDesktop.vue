@@ -18,11 +18,15 @@ export default {
 </script>
 
 <style scoped>
+section {
+	display: flex;
+	flex-direction: column;
+	justify-content: flex-start;
+	min-height: 100vh;
+}
 main {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  min-height: 95vh;
-
+	display: flex;
+	justify-content: center;
+	align-items: center;
 }
 </style>

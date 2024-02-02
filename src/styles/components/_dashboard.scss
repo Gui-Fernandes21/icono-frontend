@@ -1,4 +1,25 @@
 #dash-container {
-  min-height: 100vh;
   width: 100vw;
+  margin-top: 16rem;
+  padding: 0 $l-size;
+}
+
+.welcome-section {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+}
+.welcome-section > h1 {
+  color: $base-orange;
+  
+  font-family: $logo-font;
+  font-size: 3rem;
+  letter-spacing: 2px;
+}
+
+.welcome-section > span {
+  font-family: $default-font;
+  color: #fff;
 }
