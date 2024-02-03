@@ -5,7 +5,8 @@ import actions from "./actions";
 export default {
   state() {
     return {
-      user: null
+      user: null,
+      profile: null
     }
   },
   getters,
