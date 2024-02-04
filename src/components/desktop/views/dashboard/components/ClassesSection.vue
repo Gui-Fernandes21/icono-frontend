@@ -21,8 +21,9 @@
 .container {
 	grid-column: 2 / span 2;
 
-	background-color: #464646;
+	background-color: #3a3a3a;
 	border-radius: 6px;
+  box-shadow: 0 0 6px #0000005a;
 
 	font-family: "Russo One", sans-serif;
 	color: #fff;

@@ -76,6 +76,7 @@ export default {
 	logout({ commit }) {
 		localStorage.removeItem('auth-token');
 		localStorage.removeItem('auth-userId');
+		commit('resetUserStore');
 		commit("logout");
 	},
 };
