@@ -66,6 +66,7 @@ header {
   display: flex;
   justify-content: space-around;
   align-items: center;
+  height: 90%;
 }
 
 .action > button {

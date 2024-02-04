@@ -9,7 +9,7 @@
 		</header>
 		<span class="gym">Icon Jiu Jitsu Team - Brussels</span>
 
-    <p class="bio">{{ profile.biography }}</p>
+		<p class="bio">{{ profile.biography }}</p>
 
 		<div class="action">
 			<button>edit profile</button>
@@ -19,18 +19,11 @@
 
 <script>
 export default {
-	methods: {
-		init() {
-			this.$store.dispatch("getProfile");
-		},
-	},
+	methods: {},
 	computed: {
 		profile() {
 			return this.$store.getters.getProfile;
 		},
-	},
-	beforeMount() {
-		this.init();
 	},
 };
 </script>
@@ -92,8 +85,8 @@ span {
 	width: 100%;
 }
 .bio {
-  font-family: 'Poppins', sans-serif;
-  text-align: start;
-  margin: 2rem 0;
+	font-family: "Poppins", sans-serif;
+	text-align: start;
+	margin: 2rem 0;
 }
 </style>

@@ -24,6 +24,13 @@ export default {
     ClassesSection,
     MembershipSection
   },
+  methods: {
+    init() {
+      this.$store.dispatch("getUser");
+      this.$store.dispatch("getProfile");
+      this.$store.dispatch("getMembership");
+    }
+  },
 	computed: {
 		user() {
 			return this.$store.getters.getUser;
@@ -32,7 +39,7 @@ export default {
 	beforeMount() {
 		if (!this.$store.getters.isAuth) this.$router.replace("/home");
 
-		if (!this.$store.getters.getUser) this.$store.dispatch("getUser");
+		if (!this.$store.getters.getUser) this.init();
 	},
 };
 </script>
