@@ -36,8 +36,6 @@ export default {
 			throw new Error("User not found");
 		}
 
-		console.log(data.user);
-
 		await commit("setUser", { ...data.user });
 
 		return { msg: "ok", status: 200 };
@@ -79,9 +77,50 @@ export default {
 			throw new Error("profile not found");
 		}
 
-		console.log(data.profile);
-
 		await commit("setProfile", { ...data.profile });
+
+		return { msg: "ok", status: 200 };
+	},
+	async getMembership({ commit, getters }) {
+		const query = `
+		query($id: ID!) {
+			membership(userId: $id) {
+				expiry_date
+    		id
+    		payment
+    		member_since
+    		status
+    		type
+			}
+		}
+	`;
+
+		const payload = {
+			query,
+			variables: { id: getters.getUserId },
+		};
+
+		const result = await fetch("http://localhost:4001/graphql", {
+			headers: {
+				"Content-Type": "application/json",
+			},
+			method: "POST",
+			body: JSON.stringify(payload),
+		});
+
+		if (!result.ok) {
+			throw new Error("Error on the request: " + result.json());
+		}
+
+		const { data } = await result.json();
+
+		if (data.membership == null) {
+			throw new Error("membership not found");
+		}
+
+		console.log(data.membership);
+
+		await commit("setMembership", { ...data.membership });
 
 		return { msg: "ok", status: 200 };
 	},
