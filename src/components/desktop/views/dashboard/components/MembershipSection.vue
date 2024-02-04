@@ -4,11 +4,32 @@
 			<h2>Membership</h2>
 		</header>
 
-    <div class="main-section">
-      
-    </div>
+		<div class="main-section">
+			<div class="row since"></div>
+			<div class="row type"></div>
+			<div class="row status"></div>
+			<div class="row expiration"></div>
+			<div class="row payment"></div>
+		</div>
+
+		<div class="action">
+			<button>edit membership</button>
+		</div>
 	</div>
 </template>
+
+<script>
+export default {
+  methods: {
+    init() {
+      this.$store.dispatch('getMembership');
+    }
+  },
+  beforeMount() {
+    this.init();
+  }
+};
+</script>
 
 <style scoped>
 .container {
@@ -29,6 +50,17 @@
 }
 header {
 	border-bottom: 1px solid #16161642;
-  padding-bottom: 1rem;
+	padding-bottom: 1rem;
+}
+
+.action > button {
+	background-color: #e3943435;
+	border: 1px solid #e39534;
+	border-radius: 8px;
+	color: #fff;
+	cursor: pointer;
+
+	padding: 1rem 5rem;
+	width: 100%;
 }
 </style>

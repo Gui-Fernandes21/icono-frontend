@@ -1,8 +1,5 @@
 export default {
-  getUser(state) {
-    return state.user;
-  },
-  getProfile(state) {
-    return state.profile;
-  }
+  getUser: (state) => state.user, 
+  getProfile: (state) => state.profile,
+  getMembership: (state) => state.membership
 }

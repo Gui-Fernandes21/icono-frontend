@@ -6,7 +6,8 @@ export default {
   state() {
     return {
       user: null,
-      profile: null
+      profile: null,
+      membership: null
     }
   },
   getters,
