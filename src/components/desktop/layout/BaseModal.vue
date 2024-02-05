@@ -1,23 +1,24 @@
 <template>
 	<Teleport to="body">
-		<div class="modal-wrapper" v-if="open">
-      <div class="backdrop"></div>
-      <div class="modal">
-        <span class="close-modal" @click="closeModal">+</span>
-        <header>
-          <slot name="header" />
-        </header>
-  
-        <div class="main-section">
-          <slot name="main" />
-        </div>
-  
-        <div class="action">
-          <slot name="action" />
-        </div>
+		<Transition>
+			<div class="modal-wrapper" v-if="open">
+				<div class="backdrop" @click="closeModal"></div>
+				<div class="modal">
+					<span class="close-modal" @click="closeModal">+</span>
+					<header>
+						<slot name="header" />
+					</header>
 
-      </div>
-		</div>
+					<div class="main-section">
+						<slot name="main" />
+					</div>
+
+					<div class="action">
+						<slot name="action" />
+					</div>
+				</div>
+			</div>
+		</Transition>
 	</Teleport>
 </template>
 
@@ -29,66 +30,76 @@ export default {
 			required: true,
 		},
 	},
-  methods: {
-    closeModal() {
-      this.$emit('close-modal');
-    }
-  }
+	methods: {
+		closeModal() {
+			this.$emit("close-modal");
+		},
+	},
 };
 </script>
 
 <style scoped>
 .modal-wrapper {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	z-index: 5;
 
-  z-index: 5;
+	transition: all 200ms ease-in-out;
 
-  display: grid;
-  place-items: center;
+	display: grid;
+	place-items: center;
 }
 .backdrop {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  z-index: 5;
-  
-  cursor: pointer;
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	z-index: 5;
 
-  background: #00000040;
-  backdrop-filter: blur(1px);
+	cursor: pointer;
+
+	background: #00000040;
+	backdrop-filter: blur(1px);
 }
 .modal {
-  position: relative;
-  z-index: 6;
+	position: relative;
+	z-index: 6;
 
-  width: 50%;
-  height: 80%;
-  padding: .5rem 2rem;
-  
-  background: #3a3a3a;
-  border-radius: 10px;
-  font-family: 'Russo One', sans-serif;
-  font-weight: 100;
-  color: #fff;
+	width: 50%;
+	height: 80%;
+	padding: 0.5rem 2rem;
+
+	background: #3a3a3a;
+	border-radius: 10px;
+	font-family: "Russo One", sans-serif;
+	font-weight: 100;
+	color: #fff;
 }
 .modal > .close-modal {
-  position: absolute;
-  top: .8rem;
-  right: 1.6rem;
+	position: absolute;
+	top: 0.8rem;
+	right: 1.6rem;
 
-  transform: rotate(45deg);
+	transform: rotate(45deg);
 
-  color: #a0a0a0;
-  cursor: pointer;
-  user-select: none;
+	color: #a0a0a0;
+	cursor: pointer;
+	user-select: none;
 
-  font-weight: bold;
-  font-size: 3rem;
+	font-weight: bold;
+	font-size: 3rem;
+}
+.v-enter-active,
+.v-leave-active {
+  transition: opacity 0.3s ease;
+}
+
+.v-enter-from,
+.v-leave-to {
+  opacity: 0;
 }
 </style>

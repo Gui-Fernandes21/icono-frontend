@@ -27,19 +27,19 @@
 			</div>
 		</div>
 
-		
 		<div class="main-section" v-else>
 			<h1>You have no membership yet, get one now!</h1>
 		</div>
 
-		
 		<div class="action">
-			<button v-if="membershipDetails">edit membership</button>
+			<button v-if="membershipDetails" @click="toggleModal">
+				edit membership
+			</button>
 			<button v-else>get a membership</button>
 		</div>
 	</div>
-	
-	<BaseModal :open="true">
+
+	<BaseModal :open="openModal" @close-modal="toggleModal">
 		<template #header>
 			<h1>Edit Membership</h1>
 		</template>
@@ -47,16 +47,24 @@
 </template>
 
 <script>
-import BaseModal from '@/components/desktop/layout/BaseModal.vue';
+import BaseModal from "@/components/desktop/layout/BaseModal.vue";
 export default {
 	components: {
-		BaseModal
+		BaseModal,
+	},
+	data() {
+		return {
+			openModal: false,
+		};
 	},
 	methods: {
 		dateFormatter(date) {
 			const rawDate = new Date(+date);
 			const splitDate = rawDate.toUTCString().split(" ").slice(1, 4);
 			return splitDate.join("-");
+		},
+		toggleModal() {
+			this.openModal = !this.openModal;
 		},
 	},
 	computed: {
@@ -70,7 +78,7 @@ export default {
 		memberExpDate() {
 			if (!this.membershipDetails) return "";
 			return this.dateFormatter(this.membershipDetails.expiry_date);
-		}
+		},
 	},
 };
 </script>
