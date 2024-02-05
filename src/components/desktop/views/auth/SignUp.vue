@@ -69,7 +69,7 @@ export default {
 				this.fields.secret.value = "";
 				this.fields.confirmSecret.value = "";
 
-				this.$router.push("/home");
+				this.$router.push("/dashboard");
 			}
 		},
 	},

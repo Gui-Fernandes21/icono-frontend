@@ -32,19 +32,39 @@
 		</div>
 
 		<div class="action">
-			<button v-if="membershipDetails">edit membership</button>
+			<button v-if="membershipDetails" @click="toggleModal">
+				edit membership
+			</button>
 			<button v-else>get a membership</button>
 		</div>
 	</div>
+
+	<BaseModal :open="openModal" @close-modal="toggleModal">
+		<template #header>
+			<h1>Edit Membership</h1>
+		</template>
+	</BaseModal>
 </template>
 
 <script>
+import BaseModal from "@/components/desktop/layout/BaseModal.vue";
 export default {
+	components: {
+		BaseModal,
+	},
+	data() {
+		return {
+			openModal: false,
+		};
+	},
 	methods: {
 		dateFormatter(date) {
 			const rawDate = new Date(+date);
 			const splitDate = rawDate.toUTCString().split(" ").slice(1, 4);
 			return splitDate.join("-");
+		},
+		toggleModal() {
+			this.openModal = !this.openModal;
 		},
 	},
 	computed: {
@@ -58,7 +78,7 @@ export default {
 		memberExpDate() {
 			if (!this.membershipDetails) return "";
 			return this.dateFormatter(this.membershipDetails.expiry_date);
-		}
+		},
 	},
 };
 </script>
