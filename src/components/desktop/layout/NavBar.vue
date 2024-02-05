@@ -60,7 +60,7 @@ nav {
 	background: #000000a1;
 	border-radius: $s-size;
 	overflow: hidden;
-  z-index: 10;
+  z-index: 3;
 }
 a {
 	color: $base-orange;

@@ -27,19 +27,31 @@
 			</div>
 		</div>
 
+		
 		<div class="main-section" v-else>
 			<h1>You have no membership yet, get one now!</h1>
 		</div>
 
+		
 		<div class="action">
 			<button v-if="membershipDetails">edit membership</button>
 			<button v-else>get a membership</button>
 		</div>
 	</div>
+	
+	<BaseModal :open="true">
+		<template #header>
+			<h1>Edit Membership</h1>
+		</template>
+	</BaseModal>
 </template>
 
 <script>
+import BaseModal from '@/components/desktop/layout/BaseModal.vue';
 export default {
+	components: {
+		BaseModal
+	},
 	methods: {
 		dateFormatter(date) {
 			const rawDate = new Date(+date);
