@@ -5,7 +5,9 @@
 	outline: none;
 }
 
-.input-control__input {
+.input-control__input,
+.input-control__select,
+.input-control__select > option {
 	background: transparent;
 	border: none;
 	margin: 1rem 0;
@@ -19,12 +21,20 @@
 	border-bottom: 1px solid darken($color: $base-orange, $amount: 10%);
 }
 
-.input-control__input:hover,
-.input-control__input:focus {
-	border-bottom: 1px solid lighten($base-orange, 15%);
+.input-control__select {
+	cursor: pointer;
 }
 
-.input-control__input::placeholder {
+.input-control__input:hover,
+.input-control__input:focus,
+.input-control__select:hover,
+.input-control__select:focus {
+	border-bottom: 1px solid lighten($base-orange, 15%);
+	background: lighten(#222, 15%);
+}
+
+.input-control__input::placeholder,
+.input-control__select::placeholder {
 	font-family: "Poppins", sans-serif;
 }
 .input-control__input.invalid {

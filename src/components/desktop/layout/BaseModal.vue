@@ -24,6 +24,7 @@
 
 <script>
 export default {
+  emits: ['close-modal'],
 	props: {
 		open: {
 			type: Boolean,
@@ -69,9 +70,13 @@ export default {
 	position: relative;
 	z-index: 6;
 
-	width: 50%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+	width: 30%;
 	height: 80%;
-	padding: 0.5rem 2rem;
+	padding: 0.5rem 2rem 1rem;
 
 	background: #3a3a3a;
 	border-radius: 10px;
@@ -92,6 +97,13 @@ export default {
 
 	font-weight: bold;
 	font-size: 3rem;
+}
+
+.modal > .close-modal:hover {
+  color: #c6c6c6;
+}
+.modal > .main-section {
+  height: 100%;
 }
 .v-enter-active,
 .v-leave-active {

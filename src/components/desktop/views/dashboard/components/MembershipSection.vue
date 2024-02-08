@@ -9,17 +9,19 @@
 				<div class="col-1">Member Since:</div>
 				<div class="col-2">{{ memberSinceDate }}</div>
 			</div>
-			<div class="row type">
-				<div class="col-1">Type of Membership:</div>
-				<div class="col-2">{{ membershipDetails.type }}</div>
-			</div>
-			<div class="row status">
-				<div class="col-1">Status:</div>
-				<div class="col-2">{{ membershipDetails.status }}</div>
-			</div>
 			<div class="row expiration">
 				<div class="col-1">Membership Expires:</div>
 				<div class="col-2">{{ memberExpDate }}</div>
+			</div>
+			<div class="row status">
+				<div class="col-1">Status:</div>
+				<div class="col-2" :class="membershipDetails.status.toLowerCase()">
+					{{ membershipDetails.status }}
+				</div>
+			</div>
+			<div class="row type">
+				<div class="col-1">Type of Membership:</div>
+				<div class="col-2">{{ membershipDetails.type }}</div>
 			</div>
 			<div class="row payment">
 				<div class="col-1">Payment Method:</div>
@@ -42,6 +44,81 @@
 	<BaseModal :open="openModal" @close-modal="toggleModal">
 		<template #header>
 			<h1>Edit Membership</h1>
+		</template>
+
+		<template #main>
+			<form @submit.prevent>
+				<div class="card-details modal__section">
+					<p>Change Payment Card:</p>
+					<div class="input-control">
+						<input
+							class="input-control__input"
+							placeholder="Name on Card"
+							type="text"
+						/>
+					</div>
+					<div class="input-control">
+						<input
+							class="input-control__input"
+							placeholder="Card Number"
+							maxlength="19"
+							type="text"
+						/>
+					</div>
+					<div class="card-details__small-input">
+						<div class="input-control">
+							<input
+								class="input-control__input"
+								placeholder="MM/YY"
+								type="tel"
+								pattern="\d*"
+								maxlength="5"
+							/>
+						</div>
+						<div class="input-control">
+							<input
+								class="input-control__input"
+								placeholder="CVC"
+								type="text"
+								maxlength="3"
+							/>
+						</div>
+					</div>
+				</div>
+
+				<div class="modal__section">
+					<div class="membership-details">
+						<div class="membership-type">
+							<p>Change Membership Type:</p>
+							<div class="input-control">
+								<select class="input-control__select" name="" id="">
+									<option value="">Choose an option</option>
+									<option value="month" selected>Month</option>
+									<option value="">Trimester</option>
+									<option value="">Semester</option>
+									<option value="">Anual</option>
+								</select>
+							</div>
+						</div>
+						<div class="membership-status" :class="membershipDetails.status">
+							{{ membershipDetails.status }}
+						</div>
+					</div>
+				</div>
+
+				<div class="history modal__section">
+					<p>History:</p>
+					<ul>
+						<li>Member since: {{ memberSinceDate }}</li>
+						<li>Membership expires: {{ memberExpDate }}</li>
+					</ul>
+				</div>
+			</form>
+		</template>
+
+		<template #action>
+			<button disabled>Save Changes</button>
+			<button class="warn">Cancel Membership</button>
 		</template>
 	</BaseModal>
 </template>
@@ -121,8 +198,25 @@ header {
 	color: #fff;
 	cursor: pointer;
 
+	margin: 5px 0;
+
 	padding: 1rem 5rem;
 	width: 100%;
+}
+.action > button:disabled {
+	background-color: #98989835;
+	border: 1px solid #989898;
+	color: #ffffff70;
+
+	cursor: not-allowed;
+}
+.action > button.warn {
+	background-color: #e3343435;
+	border: 1px solid #e33434;
+}
+.action > button.warn:hover {
+	background-color: #ff393935;
+	border: 1px solid #f93838;
 }
 .row {
 	display: flex;
@@ -136,5 +230,41 @@ header {
 .row > .col-2 {
 	font-family: "Poppins", sans-serif;
 	font-size: 10px;
+}
+.col-2.active,
+.membership-status.ACTIVE {
+	padding: 5px 10px;
+	border-radius: 10px;
+	border: 1px solid #6ce334;
+	background-color: #6be3345b;
+}
+.membership-details {
+	display: flex;
+	align-items: center;
+	width: 50%;
+	gap: 2rem;
+}
+.card-details__small-input {
+	display: flex;
+	gap: 2rem;
+	width: 50%;
+}
+.card-details__small-input > .input-control > input,
+.input-control > select {
+	width: 100%;
+}
+form {
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+
+	height: 100%;
+	/* align-items: center; */
+}
+ul {
+	padding: 1rem 2rem 0;
+}
+.history {
+	padding-bottom: 10px;
 }
 </style>
