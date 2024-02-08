@@ -1,26 +1,31 @@
 #dash-container {
-  width: 100vw;
-  margin-top: 16rem;
-  padding: 0 $l-size;
+	width: 100vw;
+	margin-top: 16rem;
+	padding: 0 $l-size;
 }
 
 .welcome-section {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
 
-  margin-bottom: 3rem;
+	margin-bottom: 3rem;
 }
 .welcome-section > h1 {
-  color: $base-orange;
-  
-  font-family: $logo-font;
-  font-size: 3rem;
-  letter-spacing: 2px;
+	color: $base-orange;
+
+	font-family: $logo-font;
+	font-size: 3rem;
+	letter-spacing: 2px;
 }
 
 .welcome-section > span {
-  font-family: $default-font;
-  color: #fff;
+	font-family: $default-font;
+	color: #fff;
+}
+
+.modal__section {
+	border-top: 1px solid #fff;
+	padding: 2rem 0;
 }

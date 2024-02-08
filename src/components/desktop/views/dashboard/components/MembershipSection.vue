@@ -48,7 +48,7 @@
 
 		<template #main>
 			<form @submit.prevent>
-				<div class="card-details section">
+				<div class="card-details modal__section">
 					<p>Change Payment Card:</p>
 					<div class="input-control">
 						<input
@@ -86,7 +86,7 @@
 					</div>
 				</div>
 
-				<div class="section">
+				<div class="modal__section">
 					<div class="membership-details">
 						<div class="membership-type">
 							<p>Change Membership Type:</p>
@@ -106,7 +106,7 @@
 					</div>
 				</div>
 
-				<div class="history section">
+				<div class="history modal__section">
 					<p>History:</p>
 					<ul>
 						<li>Member since: {{ memberSinceDate }}</li>
@@ -238,10 +238,6 @@ header {
 	border: 1px solid #6ce334;
 	background-color: #6be3345b;
 }
-.section {
-	border-top: 1px solid #fff;
-	padding: 2rem 0;
-}
 .membership-details {
 	display: flex;
 	align-items: center;
@@ -266,6 +262,9 @@ form {
 	/* align-items: center; */
 }
 ul {
-	padding: 1rem 2rem;
+	padding: 1rem 2rem 0;
+}
+.history {
+	padding-bottom: 10px;
 }
 </style>

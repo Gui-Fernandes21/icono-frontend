@@ -24,6 +24,7 @@
 
 <script>
 export default {
+  emits: ['close-modal'],
 	props: {
 		open: {
 			type: Boolean,
@@ -73,9 +74,9 @@ export default {
   flex-direction: column;
   justify-content: space-between;
 
-	width: 40%;
+	width: 30%;
 	height: 80%;
-	padding: 0.5rem 2rem;
+	padding: 0.5rem 2rem 1rem;
 
 	background: #3a3a3a;
 	border-radius: 10px;

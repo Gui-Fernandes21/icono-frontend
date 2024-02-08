@@ -118,8 +118,6 @@ export default {
 			throw new Error("membership not found");
 		}
 
-		console.log(data.membership);
-
 		await commit("setMembership", { ...data.membership });
 
 		return { msg: "ok", status: 200 };

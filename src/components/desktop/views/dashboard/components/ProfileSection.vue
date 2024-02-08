@@ -12,14 +12,87 @@
 		<p class="bio">{{ profile.biography }}</p>
 
 		<div class="action">
-			<button>edit profile</button>
+			<button @click="toggleModal">edit profile</button>
 		</div>
 	</div>
+
+	<BaseModal :open="openModal" @close-modal="toggleModal">
+		<template #header>
+			<h1>Edit Profile</h1>
+		</template>
+
+		<template #main>
+			<div class="modal__section">
+				<p>Edit Profile Picture:</p>
+				<div class="picture-section">
+					<div class="input-control">
+						<div class="img-container edit-pic" @click="uploadPicture">
+							<img src="/img/gui-pan-medal.jpg" alt="profile_picture" />
+						</div>
+						<input ref="file" v-show="false" type="file" capture />
+					</div>
+				</div>
+			</div>
+
+			<div class="modal__section">
+				<p>Edit Name:</p>
+				<div class="name-section">
+					<div class="input-control">
+						<input
+							type="text"
+							placeholder="First Name"
+							class="input-control__input"
+						/>
+					</div>
+					<div class="input-control">
+						<input
+							type="text"
+							placeholder="Last Name"
+							class="input-control__input"
+						/>
+					</div>
+				</div>
+			</div>
+
+			<div class="modal__section">
+				<p>Edit Biography:</p>
+				<div class="name-section">
+					<div class="input-control">
+						<textarea
+							type="text"
+							placeholder="Bio"
+							class="input-control__input"
+						/>
+					</div>
+				</div>
+			</div>
+		</template>
+
+		<template #action>
+			<button disabled>Save Changes</button>
+		</template>
+	</BaseModal>
 </template>
 
 <script>
+import BaseModal from "@/components/desktop/layout/BaseModal.vue";
 export default {
-	methods: {},
+	components: {
+		BaseModal,
+	},
+	data() {
+		return {
+			openModal: false,
+		};
+	},
+	methods: {
+		toggleModal() {
+			this.openModal = !this.openModal;
+		},
+		uploadPicture() {
+			this.$refs.file.click();
+		},
+	},
 	computed: {
 		profile() {
 			return this.$store.getters.getProfile;
@@ -40,7 +113,7 @@ export default {
 
 	background-color: #3a3a3a;
 	border-radius: 6px;
-  box-shadow: 0 0 6px #0000005a;
+	box-shadow: 0 0 6px #0000005a;
 
 	font-family: "Russo One", sans-serif;
 	color: #fff;
@@ -75,6 +148,26 @@ span {
 		width: 100%;
 	}
 }
+.edit-pic {
+	position: relative;
+}
+.edit-pic::after {
+	content: "";
+	cursor: pointer;
+	display: block;
+	position: absolute;
+	z-index: 3;
+	top: 0;
+	left: 0;
+	height: 100%;
+	width: 100%;
+	border-radius: 50%;
+	transition: 150ms ease-in-out all;
+	background-color: rgba(0, 0, 0, 0.102);
+}
+.edit-pic:hover:after {
+	background-color: rgba(0, 0, 0, 0.437);
+}
 .action > button {
 	background-color: #e3943435;
 	border: 1px solid #e39534;
@@ -84,6 +177,26 @@ span {
 
 	padding: 1rem 5rem;
 	width: 100%;
+}
+
+.name-section {
+	display: flex;
+	gap: 2rem;
+	width: 100%;
+}
+.input-control,
+.input-control__input {
+	width: 100%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+.action > button:disabled {
+	background-color: #98989835;
+	border: 1px solid #989898;
+	color: #ffffff70;
+
+	cursor: not-allowed;
 }
 .bio {
 	font-family: "Poppins", sans-serif;
