@@ -12,7 +12,7 @@
 		<p class="bio">{{ profile.biography }}</p>
 
 		<div class="action">
-			<button @click="toggleModal">edit profile</button>
+			<button class="primary-btn" @click="toggleModal">edit profile</button>
 		</div>
 	</div>
 
@@ -27,10 +27,19 @@
 				<div class="picture-section">
 					<div class="input-control">
 						<div class="img-container edit-pic" @click="uploadPicture">
-							<img src="/img/gui-pan-medal.jpg" alt="profile_picture" />
+							<img :src="profilePicUrl" alt="profile_picture" />
 						</div>
-						<input ref="file" v-show="false" type="file" capture />
+						<input
+							ref="file"
+							v-show="false"
+							type="file"
+							@input="captureFile"
+							capture
+						/>
 					</div>
+					<p v-if="picFile">
+						{{ picFile.name }} <span @click="clearFile">X</span>
+					</p>
 				</div>
 			</div>
 
@@ -69,7 +78,7 @@
 		</template>
 
 		<template #action>
-			<button disabled>Save Changes</button>
+			<button class="primary-btn" disabled>Save Changes</button>
 		</template>
 	</BaseModal>
 </template>
@@ -83,6 +92,8 @@ export default {
 	data() {
 		return {
 			openModal: false,
+			picFile: null,
+			picData: null,
 		};
 	},
 	methods: {
@@ -92,10 +103,32 @@ export default {
 		uploadPicture() {
 			this.$refs.file.click();
 		},
+		captureFile(input) {
+			if (!input || !input.target.files[0]) return;
+
+			const file = input.target.files[0];
+			this.picFile = file;
+
+			const fReader = new FileReader();
+			fReader.readAsDataURL(file);
+			fReader.onloadend = (parsed) => {
+				this.picData = parsed.target.result;
+			};
+		},
+		clearFile() {
+			this.picData = null;
+			this.picFile = null;
+		},
 	},
 	computed: {
 		profile() {
 			return this.$store.getters.getProfile;
+		},
+		profilePicUrl() {
+			if (!this.profile) return;
+			if (!this.picData) return "/img/gui-pan-medal.jpg";
+
+			return this.picData;
 		},
 	},
 };
@@ -163,22 +196,11 @@ span {
 	width: 100%;
 	border-radius: 50%;
 	transition: 150ms ease-in-out all;
-	background-color: rgba(0, 0, 0, 0.102);
+	/* background-color: rgba(0, 0, 0, 0.102); */
 }
 .edit-pic:hover:after {
 	background-color: rgba(0, 0, 0, 0.437);
 }
-.action > button {
-	background-color: #e3943435;
-	border: 1px solid #e39534;
-	border-radius: 8px;
-	color: #fff;
-	cursor: pointer;
-
-	padding: 1rem 5rem;
-	width: 100%;
-}
-
 .name-section {
 	display: flex;
 	gap: 2rem;
@@ -191,16 +213,38 @@ span {
 	align-items: center;
 	justify-content: center;
 }
-.action > button:disabled {
-	background-color: #98989835;
-	border: 1px solid #989898;
-	color: #ffffff70;
-
-	cursor: not-allowed;
-}
 .bio {
 	font-family: "Poppins", sans-serif;
 	text-align: start;
 	margin: 2rem 0;
+}
+.picture-section {
+	text-align: center;
+
+	p {
+		margin-top: 1rem;
+		gap: 1rem;
+		position: relative;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+	}
+}
+.picture-section > p > span {
+	font-family: "Russo One", sans-serif;
+
+	padding: 2px;
+	cursor: pointer;
+	display: block;
+	height: 100%;
+	width: 1.5rem;
+	border: 1px solid #e75252;
+	color: #e75252;
+
+	transition: 150ms ease-in-out all;
+}
+.picture-section > p > span:hover {
+	background-color: #e75252;
+	color: #fff;
 }
 </style>

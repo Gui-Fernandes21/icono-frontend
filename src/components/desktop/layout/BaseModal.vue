@@ -74,7 +74,7 @@ export default {
   flex-direction: column;
   justify-content: space-between;
 
-	width: 30%;
+	width: 35%;
 	height: 80%;
 	padding: 0.5rem 2rem 1rem;
 

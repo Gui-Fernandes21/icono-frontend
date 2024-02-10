@@ -26,7 +26,7 @@ See [Configuration Reference](https://cli.vuejs.org/config/).
 
 
 
-### Project Structure
+## Project Structure
 
 - Api Calls being made in Store
 - Api makes use of Graphql endpoints 
@@ -34,4 +34,7 @@ See [Configuration Reference](https://cli.vuejs.org/config/).
 
 ## Improvements to be made
  - Create middleware auth guard 
- - take the logic away from the components
+ - Take the logic away from the components
+ - Restructure the styles
+ - Create Loading, Success, and Error global modals
+ - Improve the Profile pic edit (Use a cropper "vue-advanced-cropper" recommended)
