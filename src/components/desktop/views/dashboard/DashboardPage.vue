@@ -14,9 +14,9 @@
 </template>
 
 <script>
-import ProfileSection from './components/ProfileSection'
-import ClassesSection from './components/ClassesSection'
-import MembershipSection from './components/MembershipSection'
+import ProfileSection from './components/profile/ProfileSection'
+import ClassesSection from './components/classes/ClassesSection'
+import MembershipSection from './components/membership/MembershipSection'
 
 export default {
   components: {
