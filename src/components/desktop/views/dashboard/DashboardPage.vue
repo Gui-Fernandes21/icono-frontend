@@ -2,7 +2,6 @@
 	<section id="dash-container">
 		<section class="welcome-section">
 			<h1>Welcome back</h1>
-			<span>{{ user ? user.name : "" }}</span>
 		</section>
 
     <div class="grid-container">

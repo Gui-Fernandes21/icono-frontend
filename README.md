@@ -34,6 +34,7 @@ See [Configuration Reference](https://cli.vuejs.org/config/).
 
 ## Improvements to be made
  - Create middleware auth guard 
+ - Create Global Plugin for sending API requests Since there's only 1 endpoint /graphql
  - Take the logic away from the components
  - Restructure the styles
  - Create Loading, Success, and Error global modals
