@@ -116,7 +116,7 @@ export default {
 		const { data } = await result.json();
 
 		if (data.membership == null) {
-			throw new Error("membership not found");
+			return;
 		}
 
 		await commit("setMembership", { ...data.membership });

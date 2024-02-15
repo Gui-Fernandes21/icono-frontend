@@ -1,5 +1,5 @@
 <template>
-  <BaseModal :open="openModal" @close-modal="closeModal">
+	<BaseModal :open="openModal" @close-modal="closeModal">
 		<template #header>
 			<h1>Edit Membership</h1>
 		</template>
@@ -54,7 +54,7 @@
 									<option value="month" selected>Month</option>
 									<option value="">Trimester</option>
 									<option value="">Semester</option>
-									<option value="">Anual</option>
+									<option value="">Annual</option>
 								</select>
 							</div>
 						</div>
@@ -82,30 +82,30 @@
 </template>
 
 <script>
-import BaseModal from '@/components/desktop/layout/BaseModal.vue';
+import BaseModal from "@/components/desktop/layout/BaseModal.vue";
 
 export default {
-  emits: ['close-modal'],
-  props: {
-    openModal: {
-      type: Boolean,
-      required: true
-    }
-  },
-  components: {
-    BaseModal
-  },
-  methods: {
-    dateFormatter(date) {
+	emits: ["close-modal"],
+	props: {
+		openModal: {
+			type: Boolean,
+			required: true,
+		},
+	},
+	components: {
+		BaseModal,
+	},
+	methods: {
+		dateFormatter(date) {
 			const rawDate = new Date(+date);
 			const splitDate = rawDate.toUTCString().split(" ").slice(1, 4);
 			return splitDate.join("-");
 		},
-    closeModal() {
-      this.$emit('close-modal');
-    }
-  },
-  computed: {
+		closeModal() {
+			this.$emit("close-modal");
+		},
+	},
+	computed: {
 		membershipDetails() {
 			return this.$store.getters.getMembership;
 		},
@@ -118,7 +118,7 @@ export default {
 			return this.dateFormatter(this.membershipDetails.expiry_date);
 		},
 	},
-}
+};
 </script>
 
 <style scoped>

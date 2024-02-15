@@ -34,28 +34,42 @@
 		</div>
 
 		<div class="action">
-			<button class="primary-btn" v-if="membershipDetails" @click="toggleModal">
+			<button
+				class="primary-btn"
+				v-if="membershipDetails"
+				@click="toggleModal('edit')"
+			>
 				edit membership
 			</button>
-			<button class="primary-btn" v-else>get a membership</button>
+			<button class="primary-btn" v-else @click="toggleModal('create')">
+				get a membership
+			</button>
 		</div>
 	</div>
 
 	<EditMembershipModal
-		:openModal="openModal"
-		@close-modal="toggleModal"
+		:openModal="editModal"
+		@close-modal="toggleModal('edit')"
 	></EditMembershipModal>
+	<CreateMembershipModal
+		:openModal="createModal"
+		@close-modal="toggleModal('create')"
+	></CreateMembershipModal>
 </template>
 
 <script>
+import CreateMembershipModal from "./CreateMembershipModal.vue";
 import EditMembershipModal from "./EditMembershipModal.vue";
+
 export default {
 	components: {
+		CreateMembershipModal,
 		EditMembershipModal,
 	},
 	data() {
 		return {
-			openModal: false,
+			editModal: false,
+			createModal: false,
 		};
 	},
 	methods: {
@@ -64,8 +78,9 @@ export default {
 			const splitDate = rawDate.toUTCString().split(" ").slice(1, 4);
 			return splitDate.join("-");
 		},
-		toggleModal() {
-			this.openModal = !this.openModal;
+		toggleModal(modal) {
+			if (modal == "edit") this.editModal = !this.editModal;
+			if (modal == "create") this.createModal = !this.createModal;
 		},
 	},
 	computed: {
