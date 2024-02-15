@@ -37,9 +37,6 @@ export default {
 	data() {},
 	methods: {
 		async signup() {
-			const name =
-				this.fields.firstName.value + " " + this.fields.lastName.value;
-
 			if (this.fields.secret.value !== this.fields.confirmSecret.value) {
 				this.errorList.push({
 					status: 400,
@@ -53,7 +50,8 @@ export default {
 			}
 
 			const variables = {
-				name,
+				firstName: this.fields.firstName.value,
+				lastName: this.fields.lastName.value,
 				email: this.fields.email.value,
 				secret: this.fields.secret.value,
 			};
