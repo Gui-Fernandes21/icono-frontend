@@ -44,7 +44,8 @@ export default {
 		const query = `
 		query($id: ID!) {
 			profile(userId: $id) {
-				name
+				firstName
+				lastName
 				picUrl
 				rank
 				id
@@ -121,5 +122,51 @@ export default {
 		await commit("setMembership", { ...data.membership });
 
 		return { msg: "ok", status: 200 };
+	},
+	async updateProfile({ getters, commit }, dataInput) {
+		const query = `
+			mutation($data: ProfileInput!) {
+				updateProfile(data: $data) {
+					id
+					firstName
+					lastName
+					picUrl
+					rank
+					biography	
+				}
+			}
+		`;
+
+		const payload = {
+			query,
+			variables: {
+				data: {
+					userId: getters.getUserId,
+					...dataInput,
+				},
+			},
+		};
+
+		const result = await fetch("http://localhost:4001/graphql", {
+			headers: {
+				"Content-Type": "application/json",
+			},
+			method: "POST",
+			body: JSON.stringify(payload),
+		});
+
+		if (!result.ok) {
+			throw new Error("Error on the request: " + result.json());
+		}
+
+		const { data } = await result.json();
+
+		if (data.updateProfile == null) {
+			throw new Error("error occured when updating the profile!");
+		}
+
+		commit('setProfile', data.updateProfile);
+
+		return result.status;
 	},
 };

@@ -1,13 +1,13 @@
 <template>
-  <BaseModal :open="openModal" @close-modal="closeModal">
+  <BaseModal :open="openModal">
 		<template #header>
-			<h1>Edit Membership</h1>
+			<h1>Get a Membership</h1>
 		</template>
 
 		<template #main>
 			<form @submit.prevent>
 				<div class="card-details modal__section">
-					<p>Change Payment Card:</p>
+					<p>Add Payment Card:</p>
 					<div class="input-control">
 						<input
 							class="input-control__input"
@@ -47,7 +47,7 @@
 				<div class="modal__section">
 					<div class="membership-details">
 						<div class="membership-type">
-							<p>Change Membership Type:</p>
+							<p>Choose Membership Type:</p>
 							<div class="input-control">
 								<select class="input-control__select" name="" id="">
 									<option value="">Choose an option</option>
@@ -58,9 +58,9 @@
 								</select>
 							</div>
 						</div>
-						<div class="membership-status" :class="membershipDetails.status">
+						<!-- <div class="membership-status" :class="membershipDetails.status">
 							{{ membershipDetails.status }}
-						</div>
+						</div> -->
 					</div>
 				</div>
 
@@ -76,7 +76,7 @@
 
 		<template #action>
 			<button class="primary-btn" disabled>Save Changes</button>
-			<button class="primary-btn warn">Cancel Membership</button>
+			<!-- <button class="primary-btn warn">Cancel Membership</button> -->
 		</template>
 	</BaseModal>
 </template>
@@ -101,9 +101,6 @@ export default {
 			const splitDate = rawDate.toUTCString().split(" ").slice(1, 4);
 			return splitDate.join("-");
 		},
-    closeModal() {
-      this.$emit('close-modal');
-    }
   },
   computed: {
 		membershipDetails() {
