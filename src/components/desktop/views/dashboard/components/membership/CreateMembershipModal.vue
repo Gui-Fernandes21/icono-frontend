@@ -6,7 +6,6 @@
 
 		<template #main>
 			<form @submit.prevent>
-				
 				<div class="modal__section">
 					<div class="membership-details">
 						<div>
@@ -103,7 +102,9 @@ export default {
 		setPay(target) {
 			this.pay = target.target.value;
 		},
-		subscribe() {},
+		subscribe() {
+			console.log(this.$api("test"));
+		},
 	},
 	computed: {
 		membershipDetails() {

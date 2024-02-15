@@ -91,7 +91,7 @@ export default {
 	data() {
 		return {
 			picFile: null,
-			picData: null,
+			picUrl: this.profile.picUrl,
 
 			firstName: this.profile.firstName,
 			lastName: this.profile.lastName,
@@ -100,7 +100,7 @@ export default {
 	},
 	methods: {
 		clearFile() {
-			this.picData = null;
+			this.picUrl = null;
 			this.picFile = null;
 		},
 		uploadPicture() {
@@ -115,7 +115,7 @@ export default {
 			const fReader = new FileReader();
 			fReader.readAsDataURL(file);
 			fReader.onloadend = (parsed) => {
-				this.picData = parsed.target.result;
+				this.picUrl = parsed.target.result;
 			};
 		},
 		getDifferingValues(obj1, obj2) {
@@ -139,7 +139,7 @@ export default {
 					firstName: this.firstName,
 					lastName: this.lastName,
 					biography: this.biography,
-					picUrl: this.picData
+					picUrl: this.picUrl
 				}
 			);
 
@@ -151,7 +151,7 @@ export default {
 	},
 	computed: {
 		profilePicUrl() {
-			return this.picData ? this.picData : this.profile.picUrl;
+			return this.picUrl ? this.picUrl : this.profile.picUrl;
 		},
 		disableSave() {
 			if (this.firstName !== this.profile.firstName) return false;

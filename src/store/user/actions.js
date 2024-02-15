@@ -17,19 +17,7 @@ export default {
 			variables: { id: getters.getUserId },
 		};
 
-		const result = await fetch("http://localhost:4001/graphql", {
-			headers: {
-				"Content-Type": "application/json",
-			},
-			method: "POST",
-			body: JSON.stringify(payload),
-		});
-
-		if (!result.ok) {
-			throw new Error("Error on the request: " + result.json());
-		}
-
-		const { data } = await result.json();
+		const data = await dispatch('callApi', payload);
 
 		if (data.user == null) {
 			await dispatch("logout");
@@ -59,19 +47,7 @@ export default {
 			variables: { id: getters.getUserId },
 		};
 
-		const result = await fetch("http://localhost:4001/graphql", {
-			headers: {
-				"Content-Type": "application/json",
-			},
-			method: "POST",
-			body: JSON.stringify(payload),
-		});
-
-		if (!result.ok) {
-			throw new Error("Error on the request: " + result.json());
-		}
-
-		const { data } = await result.json();
+		const data = await dispatch('callApi', payload);
 
 		if (data.profile == null) {
 			await dispatch("logout");
@@ -82,7 +58,7 @@ export default {
 
 		return { msg: "ok", status: 200 };
 	},
-	async getMembership({ commit, getters }) {
+	async getMembership({ commit, getters, dispatch }) {
 		const query = `
 		query($id: ID!) {
 			membership(userId: $id) {
@@ -101,19 +77,7 @@ export default {
 			variables: { id: getters.getUserId },
 		};
 
-		const result = await fetch("http://localhost:4001/graphql", {
-			headers: {
-				"Content-Type": "application/json",
-			},
-			method: "POST",
-			body: JSON.stringify(payload),
-		});
-
-		if (!result.ok) {
-			throw new Error("Error on the request: " + result.json());
-		}
-
-		const { data } = await result.json();
+		const data = await dispatch('callApi', payload);
 
 		if (data.membership == null) {
 			return;
@@ -123,7 +87,7 @@ export default {
 
 		return { msg: "ok", status: 200 };
 	},
-	async updateProfile({ getters, commit }, dataInput) {
+	async updateProfile({ getters, commit, dispatch }, dataInput) {
 		const query = `
 			mutation($data: ProfileInput!) {
 				updateProfile(data: $data) {
@@ -147,19 +111,7 @@ export default {
 			},
 		};
 
-		const result = await fetch("http://localhost:4001/graphql", {
-			headers: {
-				"Content-Type": "application/json",
-			},
-			method: "POST",
-			body: JSON.stringify(payload),
-		});
-
-		if (!result.ok) {
-			throw new Error("Error on the request: " + result.json());
-		}
-
-		const { data } = await result.json();
+		const data = await dispatch('callApi', payload);
 
 		if (data.updateProfile == null) {
 			throw new Error("error occured when updating the profile!");
@@ -167,6 +119,6 @@ export default {
 
 		commit('setProfile', data.updateProfile);
 
-		return result.status;
+		return { msg: "ok", status: 200 };
 	},
 };
