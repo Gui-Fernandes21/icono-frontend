@@ -17,7 +17,7 @@ export default {
 			variables: { id: getters.getUserId },
 		};
 
-		const data = await dispatch('callApi', payload);
+		const data = await dispatch("callApi", payload);
 
 		if (data.user == null) {
 			await dispatch("logout");
@@ -47,7 +47,7 @@ export default {
 			variables: { id: getters.getUserId },
 		};
 
-		const data = await dispatch('callApi', payload);
+		const data = await dispatch("callApi", payload);
 
 		if (data.profile == null) {
 			await dispatch("logout");
@@ -77,7 +77,7 @@ export default {
 			variables: { id: getters.getUserId },
 		};
 
-		const data = await dispatch('callApi', payload);
+		const data = await dispatch("callApi", payload);
 
 		if (data.membership == null) {
 			return;
@@ -111,13 +111,42 @@ export default {
 			},
 		};
 
-		const data = await dispatch('callApi', payload);
+		const data = await dispatch("callApi", payload);
 
 		if (data.updateProfile == null) {
 			throw new Error("error occured when updating the profile!");
 		}
 
-		commit('setProfile', data.updateProfile);
+		commit("setProfile", data.updateProfile);
+
+		return { msg: "ok", status: 200 };
+	},
+	async createMembership({ commit, dispatch }, dataInput) {
+		const query = `
+			mutation($data: createMembershipInput!) {
+				addMembership(data: $data) {
+					expiry_date
+    			id
+    			payment
+    			member_since
+    			status
+    			type
+				}
+			}
+		`;
+
+		const payload = {
+			query,
+			variables: dataInput,
+		};
+
+		const data = await dispatch("callApi", payload);
+
+		if (data.addMembership == null) {
+			throw new Error("error occured when creating the membership! Try again later.");
+		}
+
+		commit("setMembership", data.addMembership );
 
 		return { msg: "ok", status: 200 };
 	},

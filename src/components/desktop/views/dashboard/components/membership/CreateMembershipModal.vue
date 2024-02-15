@@ -18,10 +18,10 @@
 									id="createMemType"
 								>
 									<option value="" selected>Choose an option</option>
-									<option value="month">Month</option>
-									<option value="trimester">Trimester</option>
-									<option value="semester">Semester</option>
-									<option value="annual">Annual</option>
+									<option value="MONTH">Month</option>
+									<option value="TRIMESTER">Trimester</option>
+									<option value="SEMESTER">Semester</option>
+									<option value="ANUAL">Annual</option>
 								</select>
 							</div>
 						</div>
@@ -40,9 +40,9 @@
 									id="createMemPay"
 								>
 									<option value="" selected>Choose an option</option>
-									<option value="month">Card</option>
-									<option value="cash">Cash</option>
-									<option value="bank">Bank Transfer</option>
+									<option value="MONTH">Card</option>
+									<option value="CASH">Cash</option>
+									<option value="BANK">Bank Transfer</option>
 								</select>
 							</div>
 						</div>
@@ -103,7 +103,17 @@ export default {
 			this.pay = target.target.value;
 		},
 		subscribe() {
-			console.log(this.$api("test"));
+			const payload = {
+				data: {
+					userId: this.$store.getters.getUserId,
+					type: this.type,
+					payment: this.pay,
+				},
+			};
+			this.$store
+				.dispatch("createMembership", payload)
+				.then(() => this.$emit("close-modal"))
+				.catch((err) => console.log(err));
 		},
 	},
 	computed: {
