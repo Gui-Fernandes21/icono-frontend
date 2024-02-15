@@ -10,7 +10,12 @@
 				<div class="picture-section">
 					<div class="input-control">
 						<div class="img-container edit-pic" @click="uploadPicture">
-							<img :src="profilePicUrl" alt="profile_picture" />
+							<img
+								:src="
+									profilePicUrl ? profilePicUrl : '/img/unknown-profile.jpg'
+								"
+								alt="profile_picture"
+							/>
 						</div>
 						<input
 							ref="file"
@@ -139,7 +144,7 @@ export default {
 					firstName: this.firstName,
 					lastName: this.lastName,
 					biography: this.biography,
-					picUrl: this.picUrl
+					picUrl: this.picUrl,
 				}
 			);
 

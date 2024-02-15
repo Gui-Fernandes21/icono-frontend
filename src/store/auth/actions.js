@@ -15,6 +15,8 @@ export default {
 
 		const data = await dispatch("callApi", payload);
 
+		console.log(data);
+
 		await commit("authenticate", data.signup);
 
 		return { msg: "ok", status: 200 };
