@@ -123,22 +123,8 @@ export default {
 				this.picUrl = parsed.target.result;
 			};
 		},
-		getDifferingValues(obj1, obj2) {
-			const differingValues = {};
-
-			for (const key in obj1) {
-				if (
-					Object.prototype.hasOwnProperty.call(obj2, key) &&
-					obj1[key] !== obj2[key]
-				) {
-					differingValues[key] = obj2[key];
-				}
-			}
-
-			return differingValues;
-		},
 		saveChange() {
-			const payload = this.getDifferingValues(
+			const payload = this.$helpers.getDifferingValues(
 				{ ...this.profile },
 				{
 					firstName: this.firstName,
