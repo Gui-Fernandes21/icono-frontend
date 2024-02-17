@@ -25,9 +25,7 @@ export default {
   },
   methods: {
     init() {
-      this.$store.dispatch("getUser");
-      this.$store.dispatch("getProfile");
-      this.$store.dispatch("getMembership");
+      this.$store.dispatch("getDashboard");
     }
   },
 	computed: {
