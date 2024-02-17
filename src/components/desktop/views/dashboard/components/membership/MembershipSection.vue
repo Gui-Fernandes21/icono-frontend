@@ -73,11 +73,6 @@ export default {
 		};
 	},
 	methods: {
-		dateFormatter(date) {
-			const rawDate = new Date(+date);
-			const splitDate = rawDate.toUTCString().split(" ").slice(1, 4);
-			return splitDate.join("-");
-		},
 		toggleModal(modal) {
 			if (modal == "edit") this.editModal = !this.editModal;
 			if (modal == "create") this.createModal = !this.createModal;
@@ -89,11 +84,11 @@ export default {
 		},
 		memberSinceDate() {
 			if (!this.membershipDetails) return "";
-			return this.dateFormatter(this.membershipDetails.member_since);
+			return this.$helpers.dateFormatter(this.membershipDetails.member_since);
 		},
 		memberExpDate() {
 			if (!this.membershipDetails) return "";
-			return this.dateFormatter(this.membershipDetails.expiry_date);
+			return this.$helpers.dateFormatter(this.membershipDetails.expiry_date);
 		},
 	},
 };
