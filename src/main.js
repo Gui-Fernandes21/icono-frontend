@@ -7,10 +7,13 @@ import router from './router/index.js'
 import 'normalize.css';
 import '@/styles/styles.scss';
 
+import helpers from '@/utils/helper'
+
 const app = createApp(App);
 
 app.use(store);
 app.use(router);
+app.use(helpers);
 
 app.mount('#app');
 

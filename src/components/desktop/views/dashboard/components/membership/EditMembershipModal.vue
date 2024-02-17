@@ -6,7 +6,7 @@
 
 		<template #main>
 			<form @submit.prevent>
-				<div class="card-details modal__section">
+				<!-- <div class="card-details modal__section">
 					<p>Change Payment Card:</p>
 					<div class="input-control">
 						<input
@@ -43,7 +43,7 @@
 						</div>
 					</div>
 				</div>
-
+ -->
 				<div class="modal__section">
 					<div class="membership-details">
 						<div class="membership-type">
@@ -63,6 +63,28 @@
 						</div>
 					</div>
 				</div>
+
+				<div class="modal__section">
+					<div class="membership-details">
+						<div>
+							<p>Payment Type:</p>
+							<div class="input-control">
+								<select
+									class="input-control__select"
+									@input="setPay"
+									name="pay"
+									id="createMemPay"
+								>
+									<option value="" selected>Choose an option</option>
+									<option value="MONTH">Card</option>
+									<option value="CASH">Cash</option>
+									<option value="BANK">Bank Transfer</option>
+								</select>
+							</div>
+						</div>
+					</div>
+				</div>
+
 
 				<div class="history modal__section">
 					<p>History:</p>
@@ -96,11 +118,6 @@ export default {
 		BaseModal,
 	},
 	methods: {
-		dateFormatter(date) {
-			const rawDate = new Date(+date);
-			const splitDate = rawDate.toUTCString().split(" ").slice(1, 4);
-			return splitDate.join("-");
-		},
 		closeModal() {
 			this.$emit("close-modal");
 		},
@@ -111,11 +128,11 @@ export default {
 		},
 		memberSinceDate() {
 			if (!this.membershipDetails) return "";
-			return this.dateFormatter(this.membershipDetails.member_since);
+			return this.$helpers.dateFormatter(this.membershipDetails.member_since);
 		},
 		memberExpDate() {
 			if (!this.membershipDetails) return "";
-			return this.dateFormatter(this.membershipDetails.expiry_date);
+			return this.$helpers.dateFormatter(this.membershipDetails.expiry_date);
 		},
 	},
 };
@@ -147,7 +164,8 @@ export default {
 form {
 	display: flex;
 	flex-direction: column;
-	justify-content: space-between;
+	/* justify-content: space-between; */
+	justify-content: flex-start;
 
 	height: 100%;
 }
