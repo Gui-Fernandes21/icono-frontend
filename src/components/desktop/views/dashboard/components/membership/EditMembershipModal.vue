@@ -85,7 +85,6 @@
 					</div>
 				</div>
 
-
 				<div class="history modal__section">
 					<p>History:</p>
 					<ul>
@@ -98,7 +97,9 @@
 
 		<template #action>
 			<button class="primary-btn" disabled>Save Changes</button>
-			<button class="primary-btn warn">Cancel Membership</button>
+			<button class="primary-btn warn" @click="cancelMembership">
+				Cancel Membership
+			</button>
 		</template>
 	</BaseModal>
 </template>
@@ -120,6 +121,12 @@ export default {
 	methods: {
 		closeModal() {
 			this.$emit("close-modal");
+		},
+		cancelMembership() {
+			this.$store
+				.dispatch("cancelMembership")
+				.then(() => this.$emit("close-modal"))
+				.catch((err) => console.log(err));
 		},
 	},
 	computed: {

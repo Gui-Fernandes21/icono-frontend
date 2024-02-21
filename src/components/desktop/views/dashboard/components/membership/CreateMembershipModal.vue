@@ -7,6 +7,15 @@
 		<template #main>
 			<form @submit.prevent>
 				<div class="modal__section">
+					<div class="academy-details">
+						<div>
+							<p>Academy:</p>
+							<AutoComplete v-model="test" :source="academies"></AutoComplete>
+						</div>
+					</div>
+				</div>
+
+				<div class="modal__section">
 					<div class="membership-details">
 						<div>
 							<p>Choose Membership Type:</p>
@@ -48,14 +57,6 @@
 						</div>
 					</div>
 				</div>
-
-				<!-- <div class="history modal__section">
-					<p>History:</p>
-					<ul>
-						<li>Member since: {{ memberSinceDate }}</li>
-						<li>Membership expires: {{ memberExpDate }}</li>
-					</ul>
-				</div> -->
 			</form>
 		</template>
 
@@ -69,6 +70,7 @@
 
 <script>
 import BaseModal from "@/components/desktop/layout/BaseModal.vue";
+import AutoComplete from "@/components/desktop/ui/AutoComplete.vue";
 
 export default {
 	emits: ["close-modal"],
@@ -80,19 +82,19 @@ export default {
 	},
 	components: {
 		BaseModal,
+		AutoComplete,
 	},
 	data() {
 		return {
 			type: "",
 			pay: "",
+			test: {}
 		};
 	},
+	beforeMount() {
+		this.getAcademies();
+	},
 	methods: {
-		dateFormatter(date) {
-			const rawDate = new Date(+date);
-			const splitDate = rawDate.toUTCString().split(" ").slice(1, 4);
-			return splitDate.join("-");
-		},
 		closeModal() {
 			this.$emit("close-modal");
 		},
@@ -101,6 +103,9 @@ export default {
 		},
 		setPay(target) {
 			this.pay = target.target.value;
+		},
+		getAcademies() {
+			this.$store.dispatch('getAcademiesCombo');
 		},
 		subscribe() {
 			const payload = {
@@ -117,23 +122,21 @@ export default {
 		},
 	},
 	computed: {
-		membershipDetails() {
-			return this.$store.getters.getMembership;
-		},
-		memberSinceDate() {
-			if (!this.membershipDetails) return "";
-			return this.dateFormatter(this.membershipDetails.member_since);
-		},
-		memberExpDate() {
-			if (!this.membershipDetails) return "";
-			return this.dateFormatter(this.membershipDetails.expiry_date);
-		},
 		isDisabled() {
 			if (this.type) return false;
 			if (this.pay) return false;
+			if (this.academies.filter(acad => acad.id == this.test.id)[0]) return false;
 			return true;
 		},
+		academies() {
+			return this.$store.getters.getAcademies;
+		}
 	},
+	watch: {
+		// test(val) {
+		// 	console.log(val);
+		// } 
+	}
 };
 </script>
 
@@ -141,7 +144,7 @@ export default {
 .membership-details {
 	display: flex;
 	align-items: center;
-	width: 50%;
+	/* width: 50%; */
 	gap: 2rem;
 }
 .card-details__small-input {

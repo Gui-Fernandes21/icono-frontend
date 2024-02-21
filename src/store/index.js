@@ -6,6 +6,7 @@ import mutations from "./rootMutations.js";
 
 import authModule from "./auth/auth.js";
 import userModule from './user/index';
+import academyModule from './academy/index';
 
 const store = createStore({
   state() {
@@ -18,7 +19,8 @@ const store = createStore({
   getters,
   modules: {
     authModule,
-    userModule
+    userModule,
+    academyModule
   },
 });
 
